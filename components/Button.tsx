@@ -1,48 +1,66 @@
-import type { StyleProp, ViewStyle } from 'react-native';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import { Text } from './Text';
+import { colors, spacing, radius } from './theme';
 
 export interface ButtonProps {
-  /** Is this the principal call to action on the page? */
-  primary?: boolean;
-  /** What background color to use */
-  backgroundColor?: string;
-  /** How large should the button be? */
-  size?: 'small' | 'medium' | 'large';
-  /** Button contents */
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
   label: string;
-  /** Optional click handler */
   onPress?: () => void;
-  style?: StyleProp<ViewStyle>;
+  disabled?: boolean;
+  loading?: boolean;
+  fullWidth?: boolean;
+  icon?: React.ReactNode;
 }
 
-/** Primary UI component for user interaction */
 export const Button = ({
-  primary = false,
-  size = 'medium',
-  backgroundColor,
+  variant = 'primary',
+  size = 'md',
   label,
-  style,
   onPress,
+  disabled = false,
+  loading = false,
+  fullWidth = false,
+  icon,
 }: ButtonProps) => {
-  const modeStyle = primary ? styles.primary : styles.secondary;
-  const textModeStyle = primary ? styles.primaryText : styles.secondaryText;
-
-  const sizeStyle = styles[size];
-  const textSizeStyle = textSizeStyles[size];
+  const isDisabled = disabled || loading;
 
   return (
-    <TouchableOpacity accessibilityRole="button" activeOpacity={0.6} onPress={onPress}>
+    <TouchableOpacity
+      accessibilityRole="button"
+      activeOpacity={0.8}
+      onPress={onPress}
+      disabled={isDisabled}
+      style={fullWidth && styles.fullWidth}
+    >
       <View
         style={[
           styles.button,
-          modeStyle,
-          sizeStyle,
-          style,
-          !!backgroundColor && { backgroundColor },
-          { borderColor: 'black' },
+          variantStyles[variant],
+          sizeStyles[size],
+          isDisabled && styles.disabled,
+          fullWidth && styles.fullWidth,
         ]}
       >
-        <Text style={[textModeStyle, textSizeStyle]}>{label}</Text>
+        {loading ? (
+          <ActivityIndicator
+            size="small"
+            color={variant === 'primary' ? colors.black : colors.foreground}
+          />
+        ) : (
+          <View style={styles.content}>
+            {icon && <View style={styles.icon}>{icon}</View>}
+            <Text
+              style={[
+                styles.label,
+                variantTextStyles[variant],
+                sizeTextStyles[size],
+              ]}
+            >
+              {label}
+            </Text>
+          </View>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -50,52 +68,91 @@ export const Button = ({
 
 const styles = StyleSheet.create({
   button: {
-    borderWidth: 0,
-    borderRadius: 48,
-  },
-  buttonText: {
-    fontWeight: '700',
-    lineHeight: 1,
-  },
-  primary: {
-    backgroundColor: '#1ea7fd',
-  },
-  primaryText: {
-    color: 'white',
-  },
-  secondary: {
-    backgroundColor: 'transparent',
-    borderColor: 'rgba(0, 0, 0, 0.15)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: radius.md,
     borderWidth: 1,
   },
-  secondaryText: {
-    color: '#333',
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
   },
-  small: {
-    paddingVertical: 10,
-    paddingHorizontal: 16,
+  icon: {
+    marginRight: spacing.xs,
   },
-  smallText: {
-    fontSize: 12,
+  label: {
+    fontWeight: '500',
   },
-  medium: {
-    paddingVertical: 11,
-    paddingHorizontal: 20,
+  fullWidth: {
+    width: '100%',
   },
-  mediumText: {
-    fontSize: 14,
-  },
-  large: {
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-  },
-  largeText: {
-    fontSize: 16,
+  disabled: {
+    opacity: 0.5,
   },
 });
 
-const textSizeStyles = {
-  small: styles.smallText,
-  medium: styles.mediumText,
-  large: styles.largeText,
-};
+const variantStyles = StyleSheet.create({
+  primary: {
+    backgroundColor: colors.white,
+    borderColor: colors.white,
+  },
+  secondary: {
+    backgroundColor: 'transparent',
+    borderColor: colors.border,
+  },
+  ghost: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+  },
+  danger: {
+    backgroundColor: colors.error,
+    borderColor: colors.error,
+  },
+});
+
+const variantTextStyles = StyleSheet.create({
+  primary: {
+    color: colors.black,
+  },
+  secondary: {
+    color: colors.foreground,
+  },
+  ghost: {
+    color: colors.foregroundSecondary,
+  },
+  danger: {
+    color: colors.white,
+  },
+});
+
+const sizeStyles = StyleSheet.create({
+  sm: {
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
+    minHeight: 32,
+  },
+  md: {
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.lg,
+    minHeight: 40,
+  },
+  lg: {
+    paddingVertical: spacing.lg,
+    paddingHorizontal: spacing.xl,
+    minHeight: 48,
+  },
+});
+
+const sizeTextStyles = StyleSheet.create({
+  sm: {
+    fontSize: 13,
+  },
+  md: {
+    fontSize: 14,
+  },
+  lg: {
+    fontSize: 16,
+  },
+});

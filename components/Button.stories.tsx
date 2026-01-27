@@ -1,53 +1,100 @@
-import type { Meta, StoryObj } from '@storybook/react-native';
-
+import type { Meta, StoryObj } from '@storybook/react';
 import { View } from 'react-native';
-import { fn } from 'storybook/test';
-
 import { Button } from './Button';
 
 const meta = {
-  title: 'Example/Button',
+  title: 'Design System/Button',
   component: Button,
   decorators: [
     (Story) => (
-      <View style={{ flex: 1, alignItems: 'flex-start' }}>
+      <View style={{ padding: 16, backgroundColor: '#000' }}>
         <Story />
       </View>
     ),
   ],
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
-  tags: ['autodocs'],
-  // Use `fn` to spy on the onPress arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#story-args
-  args: { onPress: fn() },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {
-    primary: true,
-    label: 'Button',
+    variant: 'primary',
+    label: 'Continue',
   },
 };
 
 export const Secondary: Story = {
   args: {
-    label: 'Button',
+    variant: 'secondary',
+    label: 'Learn More',
   },
 };
 
-export const Large: Story = {
+export const Ghost: Story = {
   args: {
-    size: 'large',
-    label: 'Button',
+    variant: 'ghost',
+    label: 'Cancel',
+  },
+};
+
+export const Danger: Story = {
+  args: {
+    variant: 'danger',
+    label: 'Delete',
   },
 };
 
 export const Small: Story = {
   args: {
-    size: 'small',
-    label: 'Button',
+    size: 'sm',
+    label: 'Small Button',
   },
+};
+
+export const Medium: Story = {
+  args: {
+    size: 'md',
+    label: 'Medium Button',
+  },
+};
+
+export const Large: Story = {
+  args: {
+    size: 'lg',
+    label: 'Large Button',
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    label: 'Loading...',
+    loading: true,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    label: 'Disabled',
+    disabled: true,
+  },
+};
+
+export const FullWidth: Story = {
+  args: {
+    label: 'Full Width Button',
+    fullWidth: true,
+  },
+};
+
+export const AllVariants: Story = {
+  render: () => (
+    <View style={{ gap: 12 }}>
+      <Button variant="primary" label="Primary" />
+      <Button variant="secondary" label="Secondary" />
+      <Button variant="ghost" label="Ghost" />
+      <Button variant="danger" label="Danger" />
+    </View>
+  ),
 };

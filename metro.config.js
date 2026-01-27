@@ -7,7 +7,9 @@ const config = getDefaultConfig(__dirname);
 const {
   withStorybook,
 } = require("@storybook/react-native/metro/withStorybook");
-
-module.exports = withStorybook(config, {
-  websockets: "auto",
-});
+const { withRozenite } = require("@rozenite/metro");
+module.exports = withRozenite(
+  withStorybook(config, {
+    websockets: "auto",
+  }),
+);
