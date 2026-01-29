@@ -12,6 +12,9 @@ const meta = {
       </View>
     ),
   ],
+  parameters: {
+    noSafeArea: true,
+  },
 } satisfies Meta<typeof AddMemberForm>;
 
 export default meta;

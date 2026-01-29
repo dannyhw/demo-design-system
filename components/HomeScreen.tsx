@@ -1,4 +1,5 @@
 import { StyleSheet, View, ScrollView } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AppHeader } from './AppHeader';
 import { SectionHeader } from './SectionHeader';
 import { MemberCard, Member } from './MemberCard';
@@ -32,9 +33,12 @@ export const HomeScreen = ({
   onRSVP,
   onAddMember,
 }: HomeScreenProps) => {
+  const insets = useSafeAreaInsets();
+
   return (
     <View style={styles.container}>
-      <AppHeader
+      <View style={{ paddingTop: insets.top }}>
+        <AppHeader
         subtitle="Mobile Development Community"
         rightAction={
           <IconButton
@@ -44,7 +48,8 @@ export const HomeScreen = ({
             accessibilityLabel="Add member"
           />
         }
-      />
+        />
+      </View>
 
       <ScrollView style={styles.scroll} contentContainerStyle={styles.content}>
         <Card variant="outlined" padding="lg" style={styles.welcomeCard}>

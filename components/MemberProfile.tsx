@@ -1,4 +1,5 @@
 import { StyleSheet, View, ScrollView } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Avatar } from './Avatar';
 import { Text } from './Text';
 import { Badge } from './Badge';
@@ -25,9 +26,15 @@ export const MemberProfile = ({
   onRemove,
   onEventPress,
 }: MemberProfileProps) => {
+  const insets = useSafeAreaInsets();
+
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <View style={styles.header}>
+    <View style={styles.container}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={[styles.content, { paddingTop: insets.top + spacing.lg }]}
+      >
+        <View style={styles.header}>
         <Avatar
           name={member.name}
           source={member.avatar ? { uri: member.avatar } : undefined}
@@ -109,7 +116,8 @@ export const MemberProfile = ({
           </View>
         </View>
       )}
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -117,6 +125,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  scrollView: {
+    flex: 1,
   },
   content: {
     padding: spacing.lg,

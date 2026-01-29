@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Input } from './Input';
 import { Button } from './Button';
 import { Text } from './Text';
@@ -42,6 +43,8 @@ export const AddMemberForm = ({
     return Object.keys(newErrors).length === 0;
   };
 
+  const insets = useSafeAreaInsets();
+
   const handleSubmit = () => {
     if (validate()) {
       onSubmit({
@@ -53,11 +56,12 @@ export const AddMemberForm = ({
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
-    >
-      <Card variant="default" padding="lg">
+    <View style={[styles.container, { paddingTop: insets.top }]}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.inner}
+      >
+        <Card variant="default" padding="lg">
         <Text variant="h2" style={styles.title}>
           Add Member
         </Text>
@@ -101,15 +105,21 @@ export const AddMemberForm = ({
             disabled={isLoading}
           />
         </View>
-      </Card>
-    </KeyboardAvoidingView>
+        </Card>
+      </KeyboardAvoidingView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: colors.background,
+  },
+  inner: {
+    flex: 1,
     padding: spacing.lg,
+    justifyContent: 'center',
   },
   title: {
     marginBottom: spacing.xs,
