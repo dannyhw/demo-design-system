@@ -1,5 +1,4 @@
 import { StyleSheet, View, ScrollView } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { EventCard, Event } from "./EventCard";
 import { SectionHeader } from "./SectionHeader";
 import { EmptyState } from "./EmptyState";
@@ -21,13 +20,12 @@ export const EventsList = ({
   onRSVP,
   onCreateEvent,
 }: EventsListProps) => {
-  const insets = useSafeAreaInsets();
   const upcomingEvents = events.filter((e) => isUpcoming(e.date));
   const pastEvents = events.filter((e) => isPast(e.date));
 
   if (events.length === 0) {
     return (
-      <View style={[styles.container, { paddingTop: insets.top }]}>
+      <View style={styles.container}>
         <EmptyState
           icon="calendar"
           title="No events yet"
@@ -43,10 +41,7 @@ export const EventsList = ({
     <View style={styles.container}>
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={[
-          styles.content,
-          { paddingTop: insets.top + spacing.lg },
-        ]}
+        contentContainerStyle={styles.content}
       >
         {upcomingEvents.length > 0 && (
           <View style={styles.section}>

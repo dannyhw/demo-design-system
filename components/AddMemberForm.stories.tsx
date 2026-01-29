@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { AddMemberForm } from './AddMemberForm';
 
 const meta = {
@@ -7,9 +7,9 @@ const meta = {
   component: AddMemberForm,
   decorators: [
     (Story) => (
-      <View style={{ flex: 1, backgroundColor: '#000', justifyContent: 'center' }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }} edges={['top']}>
         <Story />
-      </View>
+      </SafeAreaView>
     ),
   ],
   parameters: {

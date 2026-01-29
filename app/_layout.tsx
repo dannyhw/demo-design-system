@@ -4,7 +4,7 @@ import { colors } from "../components/theme";
 const StorybookEnabled = process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === "true";
 
 export const unstable_settings = {
-  initialRouteName: StorybookEnabled ? "(storybook)/index" : "(pages)/index",
+  initialRouteName: StorybookEnabled ? "(storybook)/index" : "(pages)",
 };
 
 export default function RootLayout() {
@@ -23,7 +23,7 @@ export default function RootLayout() {
         />
       </Stack.Protected>
 
-      <Stack.Screen name="(pages)/index" options={{ title: "Home" }} />
+      <Stack.Screen name="(pages)" options={{ headerShown: false }} />
     </Stack>
   );
 }

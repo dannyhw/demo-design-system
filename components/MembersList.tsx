@@ -1,5 +1,4 @@
 import { StyleSheet, View, ScrollView } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MemberCard, Member } from "./MemberCard";
 import { SectionHeader } from "./SectionHeader";
 import { EmptyState } from "./EmptyState";
@@ -18,13 +17,12 @@ export const MembersList = ({
   onRemoveMember,
   onAddMember,
 }: MembersListProps) => {
-  const insets = useSafeAreaInsets();
   const organizers = members.filter((m) => m.isOrganizer);
   const regularMembers = members.filter((m) => !m.isOrganizer);
 
   if (members.length === 0) {
     return (
-      <View style={[styles.container, { paddingTop: insets.top }]}>
+      <View style={styles.container}>
         <EmptyState
           icon="person.2.fill"
           title="No members yet"
@@ -40,10 +38,7 @@ export const MembersList = ({
     <View style={styles.container}>
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={[
-          styles.content,
-          { paddingTop: insets.top + spacing.lg },
-        ]}
+        contentContainerStyle={styles.content}
       >
         {organizers.length > 0 && (
           <View style={styles.section}>

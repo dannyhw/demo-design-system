@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Input } from './Input';
 import { Button } from './Button';
 import { Text } from './Text';
@@ -43,8 +42,6 @@ export const AddMemberForm = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const insets = useSafeAreaInsets();
-
   const handleSubmit = () => {
     if (validate()) {
       onSubmit({
@@ -56,7 +53,7 @@ export const AddMemberForm = ({
   };
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
+    <View style={styles.container}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.inner}
