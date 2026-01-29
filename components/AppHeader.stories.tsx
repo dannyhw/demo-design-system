@@ -6,6 +6,17 @@ import { IconButton } from './IconButton';
 const meta = {
   title: 'React Native Porto/AppHeader',
   component: AppHeader,
+  argTypes: {
+    rightAction: {
+      control: { type: 'select' },
+      options: ['None', 'Add', 'Add member'],
+      mapping: {
+        'None': undefined,
+        'Add': <IconButton icon="+" size="sm" accessibilityLabel="Add" />,
+        'Add member': <IconButton icon="+" size="sm" accessibilityLabel="Add member" />,
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <View style={{ backgroundColor: '#000' }}>
@@ -39,7 +50,7 @@ export const WithBackButton: Story = {
 
 export const WithRightAction: Story = {
   args: {
-    rightAction: <IconButton icon="+" size="sm" accessibilityLabel="Add" />,
+    rightAction: 'Add',
   },
 };
 
@@ -56,6 +67,6 @@ export const FullHeader: Story = {
     subtitle: '42 members',
     showBack: true,
     onBack: () => {},
-    rightAction: <IconButton icon="+" size="sm" accessibilityLabel="Add member" />,
+    rightAction: 'Add member',
   },
 };

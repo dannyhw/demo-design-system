@@ -7,6 +7,16 @@ import { Text } from './Text';
 const meta = {
   title: 'Design System/Input',
   component: Input,
+  argTypes: {
+    prefix: {
+      control: { type: 'select' },
+      options: ['None', 'https://'],
+      mapping: {
+        'None': undefined,
+        'https://': <Text color="tertiary">https://</Text>,
+      },
+    },
+  },
   decorators: [
     (Story) => (
       <View style={{ padding: 16, backgroundColor: '#000' }}>
@@ -63,7 +73,7 @@ export const WithPrefix: Story = {
   args: {
     label: 'Website',
     placeholder: 'yoursite.com',
-    prefix: <Text color="tertiary">https://</Text>,
+    prefix: 'https://',
   },
 };
 

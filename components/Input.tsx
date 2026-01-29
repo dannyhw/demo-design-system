@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   StyleSheet,
   TextInput,
   TextInputProps,
   View,
   TouchableOpacity,
-} from 'react-native';
-import { Text } from './Text';
-import { colors, spacing, radius, typography } from './theme';
+} from "react-native";
+import { Text } from "./Text";
+import { colors, spacing, radius, typography } from "./theme";
 
-export interface InputProps extends Omit<TextInputProps, 'style'> {
+export interface InputProps extends Omit<TextInputProps, "style"> {
   label?: string;
   placeholder?: string;
   error?: string;
@@ -65,8 +65,8 @@ export const Input = ({
         <TextInput
           style={[
             styles.input,
-            prefix && styles.inputWithPrefix,
-            suffix && styles.inputWithSuffix,
+            !!prefix && styles.inputWithPrefix,
+            !!suffix && styles.inputWithSuffix,
           ]}
           placeholder={placeholder}
           placeholderTextColor={colors.foregroundTertiary}
@@ -79,7 +79,9 @@ export const Input = ({
         {suffix && <View style={styles.suffix}>{suffix}</View>}
         {onClear && value && (
           <TouchableOpacity onPress={onClear} style={styles.clearButton}>
-            <Text color="tertiary" style={styles.clearIcon}>×</Text>
+            <Text color="tertiary" style={styles.clearIcon}>
+              ×
+            </Text>
           </TouchableOpacity>
         )}
       </View>
@@ -99,14 +101,14 @@ export const Input = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: "100%",
   },
   label: {
     marginBottom: spacing.sm,
   },
   inputWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: colors.backgroundSecondary,
     borderWidth: 1,
     borderColor: colors.border,

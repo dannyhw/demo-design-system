@@ -1,0 +1,29 @@
+import { Stack } from "expo-router";
+import { colors } from "../components/theme";
+
+const StorybookEnabled = process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === "true";
+
+export const unstable_settings = {
+  initialRouteName: StorybookEnabled ? "(storybook)/index" : "(pages)/index",
+};
+
+export default function RootLayout() {
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: { backgroundColor: colors.background },
+        headerTintColor: colors.foreground,
+        contentStyle: { backgroundColor: colors.background },
+      }}
+    >
+      <Stack.Protected guard={StorybookEnabled}>
+        <Stack.Screen
+          name="(storybook)/index"
+          options={{ title: "Storybook", headerShown: false }}
+        />
+      </Stack.Protected>
+
+      <Stack.Screen name="(pages)/index" options={{ title: "Home" }} />
+    </Stack>
+  );
+}
