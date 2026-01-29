@@ -1,9 +1,9 @@
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { EventCard, Event } from './EventCard';
-import { SectionHeader } from './SectionHeader';
-import { EmptyState } from './EmptyState';
-import { colors, spacing } from './theme';
+import { StyleSheet, View, ScrollView } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { EventCard, Event } from "./EventCard";
+import { SectionHeader } from "./SectionHeader";
+import { EmptyState } from "./EmptyState";
+import { colors, spacing } from "./theme";
 
 export interface EventsListProps {
   events: Event[];
@@ -29,7 +29,7 @@ export const EventsList = ({
     return (
       <View style={[styles.container, { paddingTop: insets.top }]}>
         <EmptyState
-          icon="📅"
+          icon="calendar"
           title="No events yet"
           description="Plan your first React Native Porto meetup!"
           actionLabel="Create Event"
@@ -43,7 +43,10 @@ export const EventsList = ({
     <View style={styles.container}>
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={[styles.content, { paddingTop: insets.top + spacing.lg }]}
+        contentContainerStyle={[
+          styles.content,
+          { paddingTop: insets.top + spacing.lg },
+        ]}
       >
         {upcomingEvents.length > 0 && (
           <View style={styles.section}>

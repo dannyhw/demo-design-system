@@ -1,9 +1,9 @@
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { MemberCard, Member } from './MemberCard';
-import { SectionHeader } from './SectionHeader';
-import { EmptyState } from './EmptyState';
-import { colors, spacing } from './theme';
+import { StyleSheet, View, ScrollView } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { MemberCard, Member } from "./MemberCard";
+import { SectionHeader } from "./SectionHeader";
+import { EmptyState } from "./EmptyState";
+import { colors, spacing } from "./theme";
 
 export interface MembersListProps {
   members: Member[];
@@ -26,7 +26,7 @@ export const MembersList = ({
     return (
       <View style={[styles.container, { paddingTop: insets.top }]}>
         <EmptyState
-          icon="👥"
+          icon="person.2.fill"
           title="No members yet"
           description="Start building your React Native Porto community!"
           actionLabel="Add Member"
@@ -40,7 +40,10 @@ export const MembersList = ({
     <View style={styles.container}>
       <ScrollView
         style={styles.scrollView}
-        contentContainerStyle={[styles.content, { paddingTop: insets.top + spacing.lg }]}
+        contentContainerStyle={[
+          styles.content,
+          { paddingTop: insets.top + spacing.lg },
+        ]}
       >
         {organizers.length > 0 && (
           <View style={styles.section}>
@@ -50,8 +53,12 @@ export const MembersList = ({
                 <MemberCard
                   key={member.id}
                   member={member}
-                  onPress={onMemberPress ? () => onMemberPress(member) : undefined}
-                  onRemove={onRemoveMember ? () => onRemoveMember(member) : undefined}
+                  onPress={
+                    onMemberPress ? () => onMemberPress(member) : undefined
+                  }
+                  onRemove={
+                    onRemoveMember ? () => onRemoveMember(member) : undefined
+                  }
                 />
               ))}
             </View>
@@ -66,8 +73,12 @@ export const MembersList = ({
                 <MemberCard
                   key={member.id}
                   member={member}
-                  onPress={onMemberPress ? () => onMemberPress(member) : undefined}
-                  onRemove={onRemoveMember ? () => onRemoveMember(member) : undefined}
+                  onPress={
+                    onMemberPress ? () => onMemberPress(member) : undefined
+                  }
+                  onRemove={
+                    onRemoveMember ? () => onRemoveMember(member) : undefined
+                  }
                 />
               ))}
             </View>

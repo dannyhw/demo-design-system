@@ -1,8 +1,10 @@
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Text } from './Text';
-import { Avatar } from './Avatar';
-import { Card } from './Card';
-import { colors, spacing, radius } from './theme';
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Text } from "./Text";
+import { Avatar } from "./Avatar";
+import { Card } from "./Card";
+import { colors, spacing, radius } from "./theme";
+import { SF_SYMBOLS_TO_MATERIAL_COMMUNITY_ICONS } from "rn-icon-mapper";
 
 export interface Event {
   id: string;
@@ -23,17 +25,17 @@ export interface EventCardProps {
 
 const formatDate = (date: Date): string => {
   const options: Intl.DateTimeFormatOptions = {
-    weekday: 'short',
-    month: 'short',
-    day: 'numeric',
+    weekday: "short",
+    month: "short",
+    day: "numeric",
   };
-  return date.toLocaleDateString('en-US', options);
+  return date.toLocaleDateString("en-US", options);
 };
 
 const formatTime = (date: Date): string => {
-  return date.toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
+  return date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
     hour12: true,
   });
 };
@@ -52,7 +54,9 @@ export const EventCard = ({ event, onPress, onRSVP }: EventCardProps) => {
             {event.date.getDate()}
           </Text>
           <Text variant="caption" color="secondary" style={styles.dateMonth}>
-            {event.date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()}
+            {event.date
+              .toLocaleDateString("en-US", { month: "short" })
+              .toUpperCase()}
           </Text>
         </View>
         <View style={styles.headerContent}>
@@ -69,13 +73,28 @@ export const EventCard = ({ event, onPress, onRSVP }: EventCardProps) => {
 
       <View style={styles.body}>
         {event.description && (
-          <Text variant="bodySmall" color="secondary" numberOfLines={2} style={styles.description}>
+          <Text
+            variant="bodySmall"
+            color="secondary"
+            numberOfLines={2}
+            style={styles.description}
+          >
             {event.description}
           </Text>
         )}
 
         <View style={styles.locationRow}>
-          <Text style={styles.locationIcon}>{event.isOnline ? '🌐' : '📍'}</Text>
+          <MaterialCommunityIcons
+            name={
+              (event.isOnline
+                ? SF_SYMBOLS_TO_MATERIAL_COMMUNITY_ICONS["globe"] || "web"
+                : SF_SYMBOLS_TO_MATERIAL_COMMUNITY_ICONS["mappin"] ||
+                  "map-marker-outline") as any
+            }
+            size={14}
+            color={colors.foregroundSecondary}
+            style={styles.locationIcon}
+          />
           <Text variant="bodySmall" color="secondary" numberOfLines={1}>
             {event.location}
           </Text>
@@ -87,11 +106,16 @@ export const EventCard = ({ event, onPress, onRSVP }: EventCardProps) => {
           {event.attendees && event.attendees.length > 0 && (
             <View style={styles.avatarStack}>
               {event.attendees.slice(0, 3).map((attendee, index) => (
-                <View key={index} style={[styles.avatarWrapper, { zIndex: 3 - index }]}>
+                <View
+                  key={index}
+                  style={[styles.avatarWrapper, { zIndex: 3 - index }]}
+                >
                   <Avatar
                     size="sm"
                     name={attendee.name}
-                    source={attendee.avatar ? { uri: attendee.avatar } : undefined}
+                    source={
+                      attendee.avatar ? { uri: attendee.avatar } : undefined
+                    }
                     showBorder
                   />
                 </View>
@@ -100,7 +124,9 @@ export const EventCard = ({ event, onPress, onRSVP }: EventCardProps) => {
           )}
           <Text variant="caption" color="secondary">
             {attendeeCount} attending
-            {spotsLeft !== undefined && spotsLeft > 0 && ` · ${spotsLeft} spots left`}
+            {spotsLeft !== undefined &&
+              spotsLeft > 0 &&
+              ` · ${spotsLeft} spots left`}
           </Text>
         </View>
 
@@ -120,13 +146,13 @@ export const EventCard = ({ event, onPress, onRSVP }: EventCardProps) => {
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: 'row',
+    flexDirection: "row",
     padding: spacing.lg,
     paddingBottom: spacing.md,
   },
   dateContainer: {
     width: 48,
-    alignItems: 'center',
+    alignItems: "center",
     marginRight: spacing.md,
   },
   dateDay: {
@@ -149,28 +175,27 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   locationRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   locationIcon: {
     marginRight: spacing.sm,
-    fontSize: 14,
   },
   footer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.md,
     borderTopWidth: 1,
     borderTopColor: colors.borderLight,
   },
   attendeesSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   avatarStack: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginRight: spacing.sm,
   },
   avatarWrapper: {
@@ -185,6 +210,6 @@ const styles = StyleSheet.create({
   rsvpText: {
     color: colors.black,
     fontSize: 13,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });

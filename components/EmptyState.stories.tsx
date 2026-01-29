@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { View } from 'react-native';
-import { EmptyState } from './EmptyState';
+import type { Meta, StoryObj } from "@storybook/react";
+import { View } from "react-native";
+import { EmptyState } from "./EmptyState";
 
 const meta = {
-  title: 'React Native Porto/EmptyState',
+  title: "React Native Porto/EmptyState",
   component: EmptyState,
   decorators: [
     (Story) => (
-      <View style={{ padding: 16, backgroundColor: '#000', minHeight: 400 }}>
+      <View style={{ padding: 16, backgroundColor: "#000", minHeight: 400 }}>
         <Story />
       </View>
     ),
@@ -20,55 +20,55 @@ type Story = StoryObj<typeof EmptyState>;
 
 export const Default: Story = {
   args: {
-    title: 'No items found',
-    description: 'Try adjusting your search or filters.',
+    title: "No items found",
+    description: "Try adjusting your search or filters.",
   },
 };
 
 export const NoMembers: Story = {
   args: {
-    icon: '👥',
-    title: 'No members yet',
-    description: 'Be the first to join the React Native Porto community!',
-    actionLabel: 'Add Member',
+    icon: "person.2.fill",
+    title: "No members yet",
+    description: "Be the first to join the React Native Porto community!",
+    actionLabel: "Add Member",
     onAction: () => {},
   },
 };
 
 export const NoEvents: Story = {
   args: {
-    icon: '📅',
-    title: 'No upcoming events',
-    description: 'Check back soon for new meetups and workshops.',
-    actionLabel: 'Create Event',
+    icon: "calendar",
+    title: "No upcoming events",
+    description: "Check back soon for new meetups and workshops.",
+    actionLabel: "Create Event",
     onAction: () => {},
   },
 };
 
 export const NoSearchResults: Story = {
   args: {
-    icon: '🔍',
-    title: 'No results found',
-    description: 'We couldn\'t find any members matching your search.',
+    icon: "magnifyingglass",
+    title: "No results found",
+    description: "We couldn't find any members matching your search.",
   },
 };
 
 export const ErrorState: Story = {
   args: {
-    icon: '⚠️',
-    title: 'Something went wrong',
-    description: 'We couldn\'t load the data. Please try again.',
-    actionLabel: 'Retry',
+    icon: "exclamationmark",
+    title: "Something went wrong",
+    description: "We couldn't load the data. Please try again.",
+    actionLabel: "Retry",
     onAction: () => {},
   },
 };
 
 export const Welcome: Story = {
   args: {
-    icon: '🎉',
-    title: 'Welcome to React Native Porto!',
-    description: 'Join our community of mobile developers in Porto.',
-    actionLabel: 'Get Started',
+    icon: "party.popper.fill",
+    title: "Welcome to React Native Porto!",
+    description: "Join our community of mobile developers in Porto.",
+    actionLabel: "Get Started",
     onAction: () => {},
   },
 };
