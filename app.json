@@ -13,24 +13,22 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.dannyhw.mydesignsystem"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.dannyhw.mydesignsystem"
     },
     "scheme": "my-design-system",
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": [
-      "@react-native-community/datetimepicker",
-      "expo-router"
-    ]
+    "plugins": ["@react-native-community/datetimepicker", "expo-router"]
   }
 }
