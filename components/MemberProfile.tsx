@@ -26,12 +26,11 @@ export const MemberProfile = ({
   onEventPress,
 }: MemberProfileProps) => {
   return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.content}
-      >
-        <View style={styles.header}>
+    <ScrollView
+      contentInsetAdjustmentBehavior="automatic"
+      contentContainerStyle={styles.content}
+    >
+      <View style={styles.header}>
         <Avatar
           name={member.name}
           source={member.avatar ? { uri: member.avatar } : undefined}
@@ -113,19 +112,11 @@ export const MemberProfile = ({
           </View>
         </View>
       )}
-      </ScrollView>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  scrollView: {
-    flex: 1,
-  },
   content: {
     padding: spacing.lg,
   },

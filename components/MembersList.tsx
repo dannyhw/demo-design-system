@@ -2,7 +2,7 @@ import { StyleSheet, View, ScrollView } from "react-native";
 import { MemberCard, Member } from "./MemberCard";
 import { SectionHeader } from "./SectionHeader";
 import { EmptyState } from "./EmptyState";
-import { colors, spacing } from "./theme";
+import { spacing } from "./theme";
 
 export interface MembersListProps {
   members: Member[];
@@ -22,7 +22,7 @@ export const MembersList = ({
 
   if (members.length === 0) {
     return (
-      <View style={styles.container}>
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
         <EmptyState
           icon="person.2.fill"
           title="No members yet"
@@ -30,73 +30,62 @@ export const MembersList = ({
           actionLabel="Add Member"
           onAction={onAddMember}
         />
-      </View>
+      </ScrollView>
     );
   }
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.content}
-      >
-        {organizers.length > 0 && (
-          <View style={styles.section}>
-            <SectionHeader title="Organizers" count={organizers.length} />
-            <View style={styles.list}>
-              {organizers.map((member) => (
-                <MemberCard
-                  key={member.id}
-                  member={member}
-                  onPress={
-                    onMemberPress ? () => onMemberPress(member) : undefined
-                  }
-                  onRemove={
-                    onRemoveMember ? () => onRemoveMember(member) : undefined
-                  }
-                />
-              ))}
-            </View>
+    <ScrollView
+      contentInsetAdjustmentBehavior="automatic"
+      contentContainerStyle={styles.content}
+    >
+      {organizers.length > 0 && (
+        <View>
+          <SectionHeader title="Organizers" count={organizers.length} />
+          <View style={styles.list}>
+            {organizers.map((member) => (
+              <MemberCard
+                key={member.id}
+                member={member}
+                onPress={
+                  onMemberPress ? () => onMemberPress(member) : undefined
+                }
+                onRemove={
+                  onRemoveMember ? () => onRemoveMember(member) : undefined
+                }
+              />
+            ))}
           </View>
-        )}
+        </View>
+      )}
 
-        {regularMembers.length > 0 && (
-          <View style={styles.section}>
-            <SectionHeader title="Members" count={regularMembers.length} />
-            <View style={styles.list}>
-              {regularMembers.map((member) => (
-                <MemberCard
-                  key={member.id}
-                  member={member}
-                  onPress={
-                    onMemberPress ? () => onMemberPress(member) : undefined
-                  }
-                  onRemove={
-                    onRemoveMember ? () => onRemoveMember(member) : undefined
-                  }
-                />
-              ))}
-            </View>
+      {regularMembers.length > 0 && (
+        <View>
+          <SectionHeader title="Members" count={regularMembers.length} />
+          <View style={styles.list}>
+            {regularMembers.map((member) => (
+              <MemberCard
+                key={member.id}
+                member={member}
+                onPress={
+                  onMemberPress ? () => onMemberPress(member) : undefined
+                }
+                onRemove={
+                  onRemoveMember ? () => onRemoveMember(member) : undefined
+                }
+              />
+            ))}
           </View>
-        )}
-      </ScrollView>
-    </View>
+        </View>
+      )}
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  scrollView: {
-    flex: 1,
-  },
   content: {
     padding: spacing.lg,
-  },
-  section: {
-    marginBottom: spacing.xl,
+    gap: spacing.xl,
   },
   list: {
     gap: spacing.md,

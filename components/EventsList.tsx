@@ -2,7 +2,7 @@ import { StyleSheet, View, ScrollView } from "react-native";
 import { EventCard, Event } from "./EventCard";
 import { SectionHeader } from "./SectionHeader";
 import { EmptyState } from "./EmptyState";
-import { colors, spacing } from "./theme";
+import { spacing } from "./theme";
 
 export interface EventsListProps {
   events: Event[];
@@ -25,7 +25,7 @@ export const EventsList = ({
 
   if (events.length === 0) {
     return (
-      <View style={styles.container}>
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
         <EmptyState
           icon="calendar"
           title="No events yet"
@@ -33,64 +33,53 @@ export const EventsList = ({
           actionLabel="Create Event"
           onAction={onCreateEvent}
         />
-      </View>
+      </ScrollView>
     );
   }
 
   return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.content}
-      >
-        {upcomingEvents.length > 0 && (
-          <View style={styles.section}>
-            <SectionHeader title="Upcoming" count={upcomingEvents.length} />
-            <View style={styles.list}>
-              {upcomingEvents.map((event) => (
-                <EventCard
-                  key={event.id}
-                  event={event}
-                  onPress={onEventPress ? () => onEventPress(event) : undefined}
-                  onRSVP={onRSVP ? () => onRSVP(event) : undefined}
-                />
-              ))}
-            </View>
+    <ScrollView
+      contentInsetAdjustmentBehavior="automatic"
+      contentContainerStyle={styles.content}
+    >
+      {upcomingEvents.length > 0 && (
+        <View>
+          <SectionHeader title="Upcoming" count={upcomingEvents.length} />
+          <View style={styles.list}>
+            {upcomingEvents.map((event) => (
+              <EventCard
+                key={event.id}
+                event={event}
+                onPress={onEventPress ? () => onEventPress(event) : undefined}
+                onRSVP={onRSVP ? () => onRSVP(event) : undefined}
+              />
+            ))}
           </View>
-        )}
+        </View>
+      )}
 
-        {pastEvents.length > 0 && (
-          <View style={styles.section}>
-            <SectionHeader title="Past Events" count={pastEvents.length} />
-            <View style={styles.list}>
-              {pastEvents.map((event) => (
-                <EventCard
-                  key={event.id}
-                  event={event}
-                  onPress={onEventPress ? () => onEventPress(event) : undefined}
-                />
-              ))}
-            </View>
+      {pastEvents.length > 0 && (
+        <View>
+          <SectionHeader title="Past Events" count={pastEvents.length} />
+          <View style={styles.list}>
+            {pastEvents.map((event) => (
+              <EventCard
+                key={event.id}
+                event={event}
+                onPress={onEventPress ? () => onEventPress(event) : undefined}
+              />
+            ))}
           </View>
-        )}
-      </ScrollView>
-    </View>
+        </View>
+      )}
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  scrollView: {
-    flex: 1,
-  },
   content: {
     padding: spacing.lg,
-  },
-  section: {
-    marginBottom: spacing.xl,
+    gap: spacing.xl,
   },
   list: {
     gap: spacing.lg,

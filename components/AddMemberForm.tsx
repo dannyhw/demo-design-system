@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { StyleSheet, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { Input } from './Input';
 import { Button } from './Button';
 import { Text } from './Text';
 import { Card } from './Card';
-import { colors, spacing } from './theme';
+import { spacing } from './theme';
 
 export interface AddMemberFormData {
   name: string;
@@ -53,12 +53,12 @@ export const AddMemberForm = ({
   };
 
   return (
-    <View style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.inner}
-      >
-        <Card variant="default" padding="lg">
+    <ScrollView
+      contentInsetAdjustmentBehavior="automatic"
+      contentContainerStyle={styles.content}
+      keyboardDismissMode="interactive"
+    >
+      <Card variant="default" padding="lg">
         <Text variant="h2" style={styles.title}>
           Add Member
         </Text>
@@ -102,21 +102,14 @@ export const AddMemberForm = ({
             disabled={isLoading}
           />
         </View>
-        </Card>
-      </KeyboardAvoidingView>
-    </View>
+      </Card>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  inner: {
-    flex: 1,
+  content: {
     padding: spacing.lg,
-    justifyContent: 'center',
   },
   title: {
     marginBottom: spacing.xs,

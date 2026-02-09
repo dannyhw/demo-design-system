@@ -1,18 +1,18 @@
 export const colors = {
   // Backgrounds
-  background: '#000000',
-  backgroundSecondary: '#0a0a0a',
-  backgroundTertiary: '#111111',
-  backgroundHover: '#1a1a1a',
+  background: '#0c0c0e',
+  backgroundSecondary: '#141416',
+  backgroundTertiary: '#1c1c1f',
+  backgroundHover: '#242428',
 
   // Foregrounds
-  foreground: '#ffffff',
-  foregroundSecondary: '#a1a1a1',
-  foregroundTertiary: '#666666',
+  foreground: '#f0f0f2',
+  foregroundSecondary: '#9a9aa0',
+  foregroundTertiary: '#5e5e66',
 
   // Borders
-  border: '#333333',
-  borderLight: '#222222',
+  border: '#2c2c30',
+  borderLight: '#1e1e22',
 
   // Accents
   accent: '#0070f3',
@@ -28,8 +28,8 @@ export const colors = {
   errorLight: 'rgba(238, 0, 0, 0.1)',
 
   // Specific
-  white: '#ffffff',
-  black: '#000000',
+  white: '#f0f0f2',
+  black: '#0c0c0e',
 };
 
 export const spacing = {
