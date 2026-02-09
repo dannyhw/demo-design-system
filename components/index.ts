@@ -23,9 +23,6 @@ export type { BadgeProps } from './Badge';
 export { Divider } from './Divider';
 export type { DividerProps } from './Divider';
 
-export { IconButton } from './IconButton';
-export type { IconButtonProps } from './IconButton';
-
 // React Native Porto Components
 export { MemberCard } from './MemberCard';
 export type { MemberCardProps, Member } from './MemberCard';
@@ -35,9 +32,6 @@ export type { EventCardProps, Event } from './EventCard';
 
 export { EmptyState } from './EmptyState';
 export type { EmptyStateProps } from './EmptyState';
-
-export { AppHeader } from './AppHeader';
-export type { AppHeaderProps } from './AppHeader';
 
 export { SectionHeader } from './SectionHeader';
 export type { SectionHeaderProps } from './SectionHeader';
