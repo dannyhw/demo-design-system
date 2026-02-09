@@ -15,5 +15,5 @@ module.exports = withRozenite(
     enabled: process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === "true",
     websockets: "auto",
     liteMode: true,
-  })
+  }),
 );
