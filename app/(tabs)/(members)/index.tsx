@@ -15,7 +15,7 @@ export default function Members() {
         options={{
           headerRight: () => (
             <Pressable
-              onPress={() => router.push("/(tabs)/(members)/add-member")}
+              onPress={() => router.navigate("/(tabs)/(members)/add-member")}
             >
               <Image
                 source="sf:person.badge.plus"
@@ -27,8 +27,8 @@ export default function Members() {
           headerSearchBarOptions: {
             placeholder: "Search members",
             onChangeText: (e) => setSearch(e.nativeEvent.text),
-            allowToolbarIntegration: true,
-            placement: "inline",
+
+            placement: "automatic",
           },
         }}
       />
