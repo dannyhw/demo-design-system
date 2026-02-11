@@ -7,6 +7,9 @@ import { colors } from "../../../components/theme";
 import { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { SF_SYMBOLS_TO_MATERIAL_COMMUNITY_ICONS } from "rn-icon-mapper";
+import { isLiquidGlassAvailable } from "expo-glass-effect";
+
+const isGlassAvailable = isLiquidGlassAvailable();
 
 export default function Members() {
   const router = useRouter();
@@ -15,6 +18,17 @@ export default function Members() {
     <>
       <Stack.Screen
         options={{
+          headerTransparent: Platform.OS === "ios" && isGlassAvailable,
+          headerShadowVisible: false,
+          headerLargeTitleShadowVisible: false,
+          headerLargeStyle:
+            Platform.OS === "ios" && isGlassAvailable
+              ? { backgroundColor: "transparent" }
+              : { backgroundColor: colors.background },
+          headerTitleStyle: { color: colors.foreground },
+          headerLargeTitle: true,
+          contentStyle: { backgroundColor: colors.background },
+          headerBlurEffect: "prominent",
           headerRight: () => (
             <Pressable
               onPress={() => router.navigate("/(tabs)/(members)/add-member")}

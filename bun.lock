@@ -20,6 +20,7 @@
         "cross-env": "^10.1.0",
         "expo": "^55.0.0-preview.10",
         "expo-constants": "~55.0.4",
+        "expo-glass-effect": "^0.1.8",
         "expo-image": "~55.0.3",
         "expo-linking": "~55.0.4",
         "expo-router": "~55.0.0-preview.7",
@@ -836,7 +837,7 @@
 
     "expo-font": ["expo-font@14.0.11", "", { "dependencies": { "fontfaceobserver": "^2.1.0" }, "peerDependencies": { "expo": "*", "react": "*", "react-native": "*" } }, "sha512-ga0q61ny4s/kr4k8JX9hVH69exVSIfcIc19+qZ7gt71Mqtm7xy2c6kwsPTCyhBW2Ro5yXTT8EaZOpuRi35rHbg=="],
 
-    "expo-glass-effect": ["expo-glass-effect@55.0.5", "", { "peerDependencies": { "expo": "*", "react": "*", "react-native": "*" } }, "sha512-ui3yOuntcqLukx32mPLcnYucRGN0zWk67euC45t6WlM6IPjXsRo6Z830drjKE7LPWbpWlRbOkdM6BpoAj+yDCQ=="],
+    "expo-glass-effect": ["expo-glass-effect@0.1.8", "", { "peerDependencies": { "expo": "*", "react": "*", "react-native": "*" } }, "sha512-9Cp17ax0Fpugue8+Bd7Ndl/dSAvGmt4bQ5mQLw9zc1A2lctUse3cEg9nI7TnDJiwKf+A/VAPN6+3K12JVMYgZg=="],
 
     "expo-image": ["expo-image@55.0.3", "", { "dependencies": { "sf-symbols-typescript": "^2.2.0" }, "peerDependencies": { "expo": "*", "react": "*", "react-native": "*", "react-native-web": "*" }, "optionalPeers": ["react-native-web"] }, "sha512-u/Mz/5lrzx+Qoo5yklJkPgMSXTEwB5oorhutucE8KSVBaKZMTdU7Tlmiw+hkiA2FSIADT4h2wA2wn6H43vdHxA=="],
 
@@ -1647,6 +1648,8 @@
     "expo-modules-autolinking/commander": ["commander@7.2.0", "", {}, "sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw=="],
 
     "expo-router/@expo/metro-runtime": ["@expo/metro-runtime@55.0.5", "", { "dependencies": { "@expo/log-box": "55.0.6", "anser": "^1.4.9", "pretty-format": "^29.7.0", "stacktrace-parser": "^0.1.10", "whatwg-fetch": "^3.0.0" }, "peerDependencies": { "expo": "*", "react": "*", "react-dom": "*", "react-native": "*" }, "optionalPeers": ["react-dom"] }, "sha512-b8WBilddI89Sc3c9dDznvmMg7PKH8Plj39Hw6cdFoSQGULLeyA7cTAUodMe2ytSOq1n1EzuO0GPHNxwsp5wprQ=="],
+
+    "expo-router/expo-glass-effect": ["expo-glass-effect@55.0.5", "", { "peerDependencies": { "expo": "*", "react": "*", "react-native": "*" } }, "sha512-ui3yOuntcqLukx32mPLcnYucRGN0zWk67euC45t6WlM6IPjXsRo6Z830drjKE7LPWbpWlRbOkdM6BpoAj+yDCQ=="],
 
     "expo-router/semver": ["semver@7.6.3", "", { "bin": { "semver": "bin/semver.js" } }, "sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A=="],
 

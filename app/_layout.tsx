@@ -2,7 +2,6 @@ import { Stack } from "expo-router";
 import { ThemeProvider, DarkTheme } from "@react-navigation/native";
 import { colors } from "../components/theme";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Platform } from "react-native";
 
 const StorybookEnabled = process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === "true";
 
@@ -45,15 +44,6 @@ export default function RootLayout() {
             name="(tabs)"
             options={{
               headerShown: false,
-              headerTransparent: Platform.OS === "ios",
-              headerShadowVisible: false,
-              headerLargeTitleShadowVisible: false,
-              headerLargeStyle:
-                Platform.OS === "ios" ? { backgroundColor: "transparent" } : {},
-              headerTitleStyle: { color: colors.foreground },
-              headerLargeTitle: true,
-              contentStyle: { backgroundColor: colors.background },
-              headerBlurEffect: "prominent",
             }}
           />
         </Stack>
