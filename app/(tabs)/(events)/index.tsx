@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { EventsList } from "../../../components";
+import { colors, EventsList } from "../../../components";
 import { events } from "../../../mocks/mock-data";
 import { useState } from "react";
 
@@ -14,6 +14,8 @@ export default function Events() {
           headerSearchBarOptions: {
             placeholder: "Search events",
             onChangeText: (e) => setSearch(e.nativeEvent.text),
+            headerIconColor: colors.foregroundSecondary,
+            textColor: colors.foreground,
           },
         }}
       />
