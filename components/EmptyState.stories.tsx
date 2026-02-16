@@ -1,17 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { View } from "react-native";
 import { EmptyState } from "./EmptyState";
 
 const meta = {
   title: "React Native Porto/EmptyState",
   component: EmptyState,
-  decorators: [
-    (Story) => (
-      <View style={{ padding: 16, backgroundColor: "#000", minHeight: 400 }}>
-        <Story />
-      </View>
-    ),
-  ],
 } satisfies Meta<typeof EmptyState>;
 
 export default meta;

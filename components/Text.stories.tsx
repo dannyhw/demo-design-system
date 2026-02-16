@@ -5,13 +5,6 @@ import { Text } from './Text';
 const meta = {
   title: 'Design System/Text',
   component: Text,
-  decorators: [
-    (Story) => (
-      <View style={{ padding: 16, backgroundColor: '#000' }}>
-        <Story />
-      </View>
-    ),
-  ],
 } satisfies Meta<typeof Text>;
 
 export default meta;

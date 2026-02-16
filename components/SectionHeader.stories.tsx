@@ -5,13 +5,6 @@ import { SectionHeader } from './SectionHeader';
 const meta = {
   title: 'React Native Porto/SectionHeader',
   component: SectionHeader,
-  decorators: [
-    (Story) => (
-      <View style={{ padding: 16, backgroundColor: '#000' }}>
-        <Story />
-      </View>
-    ),
-  ],
 } satisfies Meta<typeof SectionHeader>;
 
 export default meta;

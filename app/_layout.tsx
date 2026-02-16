@@ -6,7 +6,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 const StorybookEnabled = process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === "true";
 
 export const unstable_settings = {
-  initialRouteName: StorybookEnabled ? "(storybook)/index" : "(tabs)",
+  // initialRouteName: StorybookEnabled ? "(storybook)/index" : "(tabs)",
+  initialRouteName: "(tabs)",
 };
 
 const theme = {
@@ -33,19 +34,18 @@ export default function RootLayout() {
             contentStyle: { backgroundColor: colors.background },
           }}
         >
-          <Stack.Protected guard={StorybookEnabled}>
-            <Stack.Screen
-              name="(storybook)/index"
-              options={{ title: "Storybook", headerShown: false }}
-            />
-          </Stack.Protected>
-
           <Stack.Screen
             name="(tabs)"
             options={{
               headerShown: false,
             }}
           />
+          <Stack.Protected guard={StorybookEnabled}>
+            <Stack.Screen
+              name="(storybook)/index"
+              options={{ title: "Storybook", headerShown: false }}
+            />
+          </Stack.Protected>
         </Stack>
       </ThemeProvider>
     </SafeAreaProvider>

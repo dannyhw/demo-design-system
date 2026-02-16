@@ -17,5 +17,6 @@ export const stackScreenOptions: StackScreenProps["options"] = {
   headerTitleStyle: { color: colors.foreground },
   headerLargeTitle: true,
   contentStyle: { backgroundColor: colors.background },
-  headerBlurEffect: "prominent",
+  headerBlurEffect:
+    Platform.OS === "ios" && isGlassAvailable ? undefined : "regular",
 };

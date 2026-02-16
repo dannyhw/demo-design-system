@@ -1,17 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { MemberProfile } from './MemberProfile';
 
 const meta = {
   title: 'Screens/MemberProfile',
   component: MemberProfile,
-  decorators: [
-    (Story) => (
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }} edges={['top']}>
-        <Story />
-      </SafeAreaView>
-    ),
-  ],
   parameters: {
     noSafeArea: true,
   },

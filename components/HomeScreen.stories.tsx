@@ -1,17 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { View } from 'react-native';
 import { HomeScreen } from './HomeScreen';
 
 const meta = {
   title: 'Screens/HomeScreen',
   component: HomeScreen,
-  decorators: [
-    (Story) => (
-      <View style={{ flex: 1, backgroundColor: '#000' }}>
-        <Story />
-      </View>
-    ),
-  ],
   parameters: {
     noSafeArea: true,
   },

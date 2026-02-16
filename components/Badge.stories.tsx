@@ -5,13 +5,6 @@ import { Badge } from './Badge';
 const meta = {
   title: 'Design System/Badge',
   component: Badge,
-  decorators: [
-    (Story) => (
-      <View style={{ padding: 16, backgroundColor: '#000' }}>
-        <Story />
-      </View>
-    ),
-  ],
 } satisfies Meta<typeof Badge>;
 
 export default meta;

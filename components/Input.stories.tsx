@@ -17,13 +17,6 @@ const meta = {
       },
     },
   },
-  decorators: [
-    (Story) => (
-      <View style={{ padding: 16, backgroundColor: '#000' }}>
-        <Story />
-      </View>
-    ),
-  ],
 } satisfies Meta<typeof Input>;
 
 export default meta;

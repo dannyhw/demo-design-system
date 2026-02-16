@@ -12,6 +12,7 @@ import { stackScreenOptions } from "../../../utils/navigation";
 export default function Members() {
   const router = useRouter();
   const [search, setSearch] = useState("");
+
   return (
     <>
       <Stack.Screen

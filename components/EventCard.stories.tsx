@@ -5,13 +5,6 @@ import { EventCard } from './EventCard';
 const meta = {
   title: 'React Native Porto/EventCard',
   component: EventCard,
-  decorators: [
-    (Story) => (
-      <View style={{ padding: 16, backgroundColor: '#000' }}>
-        <Story />
-      </View>
-    ),
-  ],
 } satisfies Meta<typeof EventCard>;
 
 export default meta;

@@ -6,13 +6,6 @@ import { Text } from './Text';
 const meta = {
   title: 'Design System/Divider',
   component: Divider,
-  decorators: [
-    (Story) => (
-      <View style={{ padding: 16, backgroundColor: '#000' }}>
-        <Story />
-      </View>
-    ),
-  ],
 } satisfies Meta<typeof Divider>;
 
 export default meta;

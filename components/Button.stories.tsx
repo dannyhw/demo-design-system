@@ -5,13 +5,6 @@ import { Button } from './Button';
 const meta = {
   title: 'Design System/Button',
   component: Button,
-  decorators: [
-    (Story) => (
-      <View style={{ padding: 16, backgroundColor: '#000' }}>
-        <Story />
-      </View>
-    ),
-  ],
 } satisfies Meta<typeof Button>;
 
 export default meta;
