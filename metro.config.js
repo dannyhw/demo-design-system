@@ -13,7 +13,8 @@ const { withRozenite } = require("@rozenite/metro");
 module.exports = withRozenite(
   withStorybook(config, {
     enabled: process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === "true",
-    websockets: "auto",
     liteMode: true,
+    websockets: "auto",
+    experimental_mcp: true,
   }),
 );
