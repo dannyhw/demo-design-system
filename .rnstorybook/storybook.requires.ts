@@ -2,6 +2,7 @@
 /// <reference types="@storybook/react-native/metro-env" />
 import { start, updateView, View, type Features } from '@storybook/react-native';
 
+
 import "@storybook/addon-ondevice-controls/register";
 import "@storybook/addon-ondevice-actions/register";
 
@@ -23,7 +24,9 @@ const normalizedStories = [
 declare global {
   var view: View;
   var STORIES: typeof normalizedStories;
-  var STORYBOOK_WEBSOCKET: { host: string; port: number } | undefined;
+  var STORYBOOK_WEBSOCKET:
+    | { host?: string; port?: number; secured?: boolean }
+    | undefined;
   var FEATURES: Features;
 }
 
@@ -34,22 +37,26 @@ const annotations = [
 ];
 
 globalThis.STORIES = normalizedStories;
-globalThis.STORYBOOK_WEBSOCKET = { host: '192.168.1.172', port: 7007 };
+globalThis.STORYBOOK_WEBSOCKET = {
+  host: '192.168.1.171',
+  port: 7007,
+  secured: false,
+};
 
 module?.hot?.accept?.();
 
 globalThis.FEATURES.ondeviceBackgrounds = true;
 
-
+const options = {}
 
 if (!globalThis.view) {
   globalThis.view = start({
     annotations,
     storyEntries: normalizedStories,
-
+    options,
   });
 } else {
-  updateView(globalThis.view, annotations, normalizedStories);
+  updateView(globalThis.view, annotations, normalizedStories, options);
 }
 
 export const view: View = globalThis.view;

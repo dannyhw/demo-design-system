@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { view } from "./storybook.requires";
 import { LiteUI } from "@storybook/react-native-ui-lite";
+import { registerRootComponent } from "expo";
 
 const StorybookUIRoot = view.getStorybookUI({
   storage: {
@@ -11,4 +12,4 @@ const StorybookUIRoot = view.getStorybookUI({
   enableWebsockets: true,
 });
 
-export default StorybookUIRoot;
+registerRootComponent(StorybookUIRoot);
