@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { ThemeProvider, DarkTheme } from "@react-navigation/native";
+import { ThemeProvider, DarkTheme } from "expo-router/react-navigation";
 import { colors } from "../components/theme";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
