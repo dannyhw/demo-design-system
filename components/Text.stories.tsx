@@ -5,11 +5,31 @@ import { Text } from './Text';
 const meta = {
   title: 'Design System/Text',
   component: Text,
+  argTypes: {
+    children: { control: { type: 'text' } },
+    variant: {
+      options: ['display', 'h1', 'h2', 'h3', 'body', 'bodySmall', 'caption', 'label'],
+      control: { type: 'select' },
+    },
+    color: {
+      options: ['primary', 'secondary', 'tertiary', 'accent', 'error', 'success'],
+      control: { type: 'radio' },
+    },
+    weight: {
+      options: ['regular', 'medium', 'semibold', 'bold'],
+      control: { type: 'radio' },
+    },
+    align: {
+      options: ['left', 'center', 'right'],
+      control: { type: 'inline-radio' },
+    },
+    style: { table: { disable: true } },
+  },
 } satisfies Meta<typeof Text>;
 
 export default meta;
 
-type Story = StoryObj<typeof Text>;
+type Story = StoryObj<typeof meta>;
 
 export const Display: Story = {
   args: {

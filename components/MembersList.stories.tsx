@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from 'storybook/test';
 import { MembersList } from './MembersList';
 
 const meta = {
@@ -6,6 +7,17 @@ const meta = {
   component: MembersList,
   parameters: {
     noSafeArea: true,
+  },
+  args: {
+    onMemberPress: fn(),
+    onRemoveMember: fn(),
+    onAddMember: fn(),
+  },
+  argTypes: {
+    members: { control: { type: 'object' } },
+    onMemberPress: { action: 'member pressed' },
+    onRemoveMember: { action: 'member removed' },
+    onAddMember: { action: 'add member' },
   },
 } satisfies Meta<typeof MembersList>;
 
@@ -31,8 +43,8 @@ export const Default: Story = {
 export const WithActions: Story = {
   args: {
     members: sampleMembers,
-    onMemberPress: () => {},
-    onRemoveMember: () => {},
+    onMemberPress: fn(),
+    onRemoveMember: fn(),
   },
 };
 
@@ -51,6 +63,6 @@ export const OnlyMembers: Story = {
 export const Empty: Story = {
   args: {
     members: [],
-    onAddMember: () => {},
+    onAddMember: fn(),
   },
 };

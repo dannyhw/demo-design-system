@@ -5,11 +5,22 @@ import { Badge } from './Badge';
 const meta = {
   title: 'Design System/Badge',
   component: Badge,
+  argTypes: {
+    label: { control: { type: 'text' } },
+    variant: {
+      options: ['default', 'success', 'warning', 'error', 'accent'],
+      control: { type: 'radio' },
+    },
+    size: {
+      options: ['sm', 'md'],
+      control: { type: 'radio' },
+    },
+  },
 } satisfies Meta<typeof Badge>;
 
 export default meta;
 
-type Story = StoryObj<typeof Badge>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -54,6 +65,7 @@ export const Small: Story = {
 };
 
 export const AllVariants: Story = {
+  args: { label: "Gallery" },
   render: () => (
     <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
       <Badge label="Default" variant="default" />
@@ -66,6 +78,7 @@ export const AllVariants: Story = {
 };
 
 export const MeetupBadges: Story = {
+  args: { label: "Gallery" },
   render: () => (
     <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
       <Badge label="Organizer" variant="accent" />

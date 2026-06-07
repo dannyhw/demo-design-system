@@ -8,6 +8,7 @@ const meta = {
   component: Button,
   args: { onPress: fn() },
   argTypes: {
+    label: { control: { type: "text" } },
     variant: {
       options: ["primary", "secondary", "ghost", "danger"],
       control: { type: "radio" },
@@ -16,12 +17,17 @@ const meta = {
       options: ["sm", "md", "lg"],
       control: { type: "radio" },
     },
+    disabled: { control: { type: "boolean" } },
+    loading: { control: { type: "boolean" } },
+    fullWidth: { control: { type: "boolean" } },
+    icon: { table: { disable: true } },
+    onPress: { action: "pressed" },
   },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
@@ -94,6 +100,7 @@ export const FullWidth: Story = {
 };
 
 export const AllVariants: Story = {
+  args: { label: "Gallery" },
   render: () => (
     <View style={{ gap: 12 }}>
       <Button variant="primary" label="Primary" />

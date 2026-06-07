@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from 'storybook/test';
 import { View } from 'react-native';
 import { Card } from './Card';
 import { Text } from './Text';
@@ -6,15 +7,33 @@ import { Text } from './Text';
 const meta = {
   title: 'Design System/Card',
   component: Card,
+  args: { onPress: fn() },
+  argTypes: {
+    variant: {
+      options: ['default', 'elevated', 'outlined'],
+      control: { type: 'radio' },
+    },
+    padding: {
+      options: ['none', 'sm', 'md', 'lg'],
+      control: { type: 'radio' },
+    },
+    onPress: { action: 'pressed' },
+    style: { table: { disable: true } },
+    children: { table: { disable: true } },
+  },
 } satisfies Meta<typeof Card>;
 
 export default meta;
 
-type Story = StoryObj<typeof Card>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => (
-    <Card>
+  args: {
+    variant: 'default',
+    padding: 'md',
+  },
+  render: (args) => (
+    <Card {...args}>
       <Text variant="h3">Card Title</Text>
       <Text color="secondary" style={{ marginTop: 8 }}>
         This is a default card with some content inside.
@@ -24,8 +43,12 @@ export const Default: Story = {
 };
 
 export const Elevated: Story = {
-  render: () => (
-    <Card variant="elevated">
+  args: {
+    variant: 'elevated',
+    padding: 'md',
+  },
+  render: (args) => (
+    <Card {...args}>
       <Text variant="h3">Elevated Card</Text>
       <Text color="secondary" style={{ marginTop: 8 }}>
         This card has a shadow for depth.
@@ -35,8 +58,12 @@ export const Elevated: Story = {
 };
 
 export const Outlined: Story = {
-  render: () => (
-    <Card variant="outlined">
+  args: {
+    variant: 'outlined',
+    padding: 'md',
+  },
+  render: (args) => (
+    <Card {...args}>
       <Text variant="h3">Outlined Card</Text>
       <Text color="secondary" style={{ marginTop: 8 }}>
         This card has a transparent background.
@@ -46,8 +73,12 @@ export const Outlined: Story = {
 };
 
 export const Pressable: Story = {
-  render: () => (
-    <Card onPress={() => {}}>
+  args: {
+    variant: 'default',
+    padding: 'md',
+  },
+  render: (args) => (
+    <Card {...args}>
       <Text variant="h3">Pressable Card</Text>
       <Text color="secondary" style={{ marginTop: 8 }}>
         Tap me to trigger an action.

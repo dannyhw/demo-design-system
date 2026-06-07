@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "storybook/test";
 import { AddMemberForm } from "./AddMemberForm";
 
 const meta = {
@@ -6,6 +7,14 @@ const meta = {
   component: AddMemberForm,
   parameters: {
     noSafeArea: true,
+  },
+  args: {
+    onSubmit: fn(),
+  },
+  argTypes: {
+    isLoading: { control: { type: "boolean" } },
+    onSubmit: { action: "submitted" },
+    onCancel: { action: "cancelled" },
   },
 } satisfies Meta<typeof AddMemberForm>;
 
@@ -15,21 +24,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    onSubmit: (data) => console.log("Submit:", data),
+    isLoading: false,
   },
 };
 
 export const WithCancel: Story = {
   args: {
-    onSubmit: (data) => console.log("Submit:", data),
-    onCancel: () => console.log("Cancel"),
+    onCancel: fn(),
+    isLoading: false,
   },
 };
 
 export const Loading: Story = {
   args: {
-    onSubmit: (data) => console.log("Submit:", data),
-    onCancel: () => console.log("Cancel"),
+    onCancel: fn(),
     isLoading: true,
   },
 };

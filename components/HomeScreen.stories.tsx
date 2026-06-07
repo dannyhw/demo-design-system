@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "storybook/test";
 import { HomeScreen } from "./HomeScreen";
 
 const meta = {
@@ -6,6 +7,25 @@ const meta = {
   component: HomeScreen,
   parameters: {
     noSafeArea: true,
+  },
+  args: {
+    onViewAllEvents: fn(),
+    onViewAllMembers: fn(),
+    onEventPress: fn(),
+    onMemberPress: fn(),
+    onRSVP: fn(),
+    onAddMember: fn(),
+  },
+  argTypes: {
+    totalMembers: { control: { type: "number", min: 0, step: 1 } },
+    upcomingEvents: { control: { type: "object" } },
+    recentMembers: { control: { type: "object" } },
+    onViewAllEvents: { action: "view all events" },
+    onViewAllMembers: { action: "view all members" },
+    onEventPress: { action: "event pressed" },
+    onMemberPress: { action: "member pressed" },
+    onRSVP: { action: "rsvp" },
+    onAddMember: { action: "add member" },
   },
 } satisfies Meta<typeof HomeScreen>;
 
@@ -62,12 +82,12 @@ export const WithAllActions: Story = {
     upcomingEvents: sampleEvents,
     recentMembers: sampleMembers,
     totalMembers: 42,
-    onViewAllEvents: () => {},
-    onViewAllMembers: () => {},
-    onEventPress: () => {},
-    onMemberPress: () => {},
-    onRSVP: () => {},
-    onAddMember: () => {},
+    onViewAllEvents: fn(),
+    onViewAllMembers: fn(),
+    onEventPress: fn(),
+    onMemberPress: fn(),
+    onRSVP: fn(),
+    onAddMember: fn(),
   },
 };
 
@@ -92,6 +112,6 @@ export const EmptyCommunity: Story = {
     upcomingEvents: [],
     recentMembers: [],
     totalMembers: 0,
-    onAddMember: () => {},
+    onAddMember: fn(),
   },
 };

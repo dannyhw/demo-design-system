@@ -1,53 +1,42 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { View } from 'react-native';
 import { Divider } from './Divider';
-import { Text } from './Text';
 
 const meta = {
   title: 'Design System/Divider',
   component: Divider,
+  argTypes: {
+    spacing: {
+      options: ['none', 'sm', 'md', 'lg'],
+      control: { type: 'radio' },
+    },
+    style: { table: { disable: true } },
+  },
 } satisfies Meta<typeof Divider>;
 
 export default meta;
 
-type Story = StoryObj<typeof Divider>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: () => (
-    <View>
-      <Text>Content above</Text>
-      <Divider />
-      <Text>Content below</Text>
-    </View>
-  ),
+  args: {
+    spacing: 'md',
+  },
 };
 
 export const NoSpacing: Story = {
-  render: () => (
-    <View>
-      <Text>Content above</Text>
-      <Divider spacing="none" />
-      <Text>Content below</Text>
-    </View>
-  ),
+  args: {
+    spacing: 'none',
+  },
 };
 
 export const SmallSpacing: Story = {
-  render: () => (
-    <View>
-      <Text>Content above</Text>
-      <Divider spacing="sm" />
-      <Text>Content below</Text>
-    </View>
-  ),
+  args: {
+    spacing: 'sm',
+  },
 };
 
 export const LargeSpacing: Story = {
-  render: () => (
-    <View>
-      <Text>Content above</Text>
-      <Divider spacing="lg" />
-      <Text>Content below</Text>
-    </View>
-  ),
+  args: {
+    spacing: 'lg',
+  },
 };

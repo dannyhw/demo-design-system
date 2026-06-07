@@ -1,14 +1,33 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "storybook/test";
 import { EmptyState } from "./EmptyState";
 
 const meta = {
   title: "React Native Porto/EmptyState",
   component: EmptyState,
+  args: { onAction: fn() },
+  argTypes: {
+    icon: {
+      options: [
+        "tray.fill",
+        "person.2.fill",
+        "calendar",
+        "magnifyingglass",
+        "exclamationmark",
+        "party.popper.fill",
+      ],
+      control: { type: "select" },
+    },
+    title: { control: { type: "text" } },
+    description: { control: { type: "text" } },
+    actionLabel: { control: { type: "text" } },
+    onAction: { action: "action pressed" },
+  },
 } satisfies Meta<typeof EmptyState>;
 
 export default meta;
 
-type Story = StoryObj<typeof EmptyState>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -23,7 +42,7 @@ export const NoMembers: Story = {
     title: "No members yet",
     description: "Be the first to join the React Native Porto community!",
     actionLabel: "Add Member",
-    onAction: () => {},
+    onAction: fn(),
   },
 };
 
@@ -33,7 +52,7 @@ export const NoEvents: Story = {
     title: "No upcoming events",
     description: "Check back soon for new meetups and workshops.",
     actionLabel: "Create Event",
-    onAction: () => {},
+    onAction: fn(),
   },
 };
 
@@ -51,7 +70,7 @@ export const ErrorState: Story = {
     title: "Something went wrong",
     description: "We couldn't load the data. Please try again.",
     actionLabel: "Retry",
-    onAction: () => {},
+    onAction: fn(),
   },
 };
 
@@ -61,6 +80,6 @@ export const Welcome: Story = {
     title: "Welcome to React Native Porto!",
     description: "Join our community of mobile developers in Porto.",
     actionLabel: "Get Started",
-    onAction: () => {},
+    onAction: fn(),
   },
 };

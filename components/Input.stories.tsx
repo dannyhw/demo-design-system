@@ -8,6 +8,23 @@ const meta = {
   title: 'Design System/Input',
   component: Input,
   argTypes: {
+    label: { control: { type: 'text' } },
+    placeholder: { control: { type: 'text' } },
+    value: { control: { type: 'text' } },
+    error: { control: { type: 'text' } },
+    hint: { control: { type: 'text' } },
+    disabled: { control: { type: 'boolean' } },
+    secureTextEntry: { control: { type: 'boolean' } },
+    multiline: { control: { type: 'boolean' } },
+    numberOfLines: { control: { type: 'number', min: 1, max: 10, step: 1 } },
+    keyboardType: {
+      options: ['default', 'email-address', 'numeric', 'phone-pad', 'url'],
+      control: { type: 'select' },
+    },
+    autoCapitalize: {
+      options: ['none', 'sentences', 'words', 'characters'],
+      control: { type: 'select' },
+    },
     prefix: {
       control: { type: 'select' },
       options: ['None', 'https://'],
@@ -16,12 +33,17 @@ const meta = {
         'https://': <Text color="tertiary">https://</Text>,
       },
     },
+    suffix: { table: { disable: true } },
+    onClear: { table: { disable: true } },
+    onChangeText: { table: { disable: true } },
+    onFocus: { table: { disable: true } },
+    onBlur: { table: { disable: true } },
   },
 } satisfies Meta<typeof Input>;
 
 export default meta;
 
-type Story = StoryObj<typeof Input>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {

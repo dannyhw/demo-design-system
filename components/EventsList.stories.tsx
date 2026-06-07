@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from 'storybook/test';
 import { EventsList } from './EventsList';
 
 const meta = {
@@ -6,6 +7,17 @@ const meta = {
   component: EventsList,
   parameters: {
     noSafeArea: true,
+  },
+  args: {
+    onEventPress: fn(),
+    onRSVP: fn(),
+    onCreateEvent: fn(),
+  },
+  argTypes: {
+    events: { control: { type: 'object' } },
+    onEventPress: { action: 'event pressed' },
+    onRSVP: { action: 'rsvp' },
+    onCreateEvent: { action: 'create event' },
   },
 } satisfies Meta<typeof EventsList>;
 
@@ -72,15 +84,15 @@ export const Default: Story = {
 export const WithActions: Story = {
   args: {
     events: sampleEvents,
-    onEventPress: () => {},
-    onRSVP: () => {},
+    onEventPress: fn(),
+    onRSVP: fn(),
   },
 };
 
 export const OnlyUpcoming: Story = {
   args: {
     events: sampleEvents.filter((e) => e.date.getTime() > Date.now()),
-    onRSVP: () => {},
+    onRSVP: fn(),
   },
 };
 
@@ -93,6 +105,6 @@ export const OnlyPast: Story = {
 export const Empty: Story = {
   args: {
     events: [],
-    onCreateEvent: () => {},
+    onCreateEvent: fn(),
   },
 };

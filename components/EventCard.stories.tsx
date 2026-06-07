@@ -1,15 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from 'storybook/test';
 import { View } from 'react-native';
 import { EventCard } from './EventCard';
 
 const meta = {
   title: 'React Native Porto/EventCard',
   component: EventCard,
+  args: {
+    onPress: fn(),
+    onRSVP: fn(),
+  },
+  argTypes: {
+    event: { control: { type: 'object' } },
+    onPress: { action: 'pressed' },
+    onRSVP: { action: 'rsvp' },
+  },
 } satisfies Meta<typeof EventCard>;
 
 export default meta;
 
-type Story = StoryObj<typeof EventCard>;
+type Story = StoryObj<typeof meta>;
 
 const baseEvent = {
   id: '1',
@@ -34,7 +44,7 @@ export const Default: Story = {
 export const WithRSVP: Story = {
   args: {
     event: baseEvent,
-    onRSVP: () => {},
+    onRSVP: fn(),
   },
 };
 
@@ -47,7 +57,7 @@ export const OnlineEvent: Story = {
       location: 'Zoom Meeting',
       isOnline: true,
     },
-    onRSVP: () => {},
+    onRSVP: fn(),
   },
 };
 
@@ -59,7 +69,7 @@ export const AlmostFull: Story = {
       attendees: Array(27).fill({ name: 'Attendee' }),
       maxAttendees: 30,
     },
-    onRSVP: () => {},
+    onRSVP: fn(),
   },
 };
 
@@ -78,11 +88,12 @@ export const NoDescription: Story = {
 export const Pressable: Story = {
   args: {
     event: baseEvent,
-    onPress: () => {},
+    onPress: fn(),
   },
 };
 
 export const EventList: Story = {
+  args: { event: baseEvent },
   render: () => (
     <View style={{ gap: 16 }}>
       <EventCard

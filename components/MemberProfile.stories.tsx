@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from 'storybook/test';
 import { MemberProfile } from './MemberProfile';
 
 const meta = {
@@ -6,6 +7,18 @@ const meta = {
   component: MemberProfile,
   parameters: {
     noSafeArea: true,
+  },
+  args: {
+    onEdit: fn(),
+    onRemove: fn(),
+    onEventPress: fn(),
+  },
+  argTypes: {
+    member: { control: { type: 'object' } },
+    eventsAttended: { control: { type: 'object' } },
+    onEdit: { action: 'edit' },
+    onRemove: { action: 'remove' },
+    onEventPress: { action: 'event pressed' },
   },
 } satisfies Meta<typeof MemberProfile>;
 
@@ -65,9 +78,9 @@ export const WithActions: Story = {
       role: 'React Native Developer',
     },
     eventsAttended: sampleEvents.slice(0, 2),
-    onEdit: () => {},
-    onRemove: () => {},
-    onEventPress: () => {},
+    onEdit: fn(),
+    onRemove: fn(),
+    onEventPress: fn(),
   },
 };
 
@@ -80,7 +93,7 @@ export const Organizer: Story = {
       isOrganizer: true,
     },
     eventsAttended: sampleEvents,
-    onEdit: () => {},
+    onEdit: fn(),
   },
 };
 

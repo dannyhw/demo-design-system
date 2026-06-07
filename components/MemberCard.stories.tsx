@@ -1,15 +1,25 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "storybook/test";
 import { View } from "react-native";
 import { MemberCard } from "./MemberCard";
 
 const meta = {
   title: "React Native Porto/MemberCard",
   component: MemberCard,
+  args: {
+    onPress: fn(),
+    onRemove: fn(),
+  },
+  argTypes: {
+    member: { control: { type: "object" } },
+    onPress: { action: "pressed" },
+    onRemove: { action: "removed" },
+  },
 } satisfies Meta<typeof MemberCard>;
 
 export default meta;
 
-type Story = StoryObj<typeof MemberCard>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -50,7 +60,7 @@ export const WithRemoveAction: Story = {
       name: "Ana Ferreira",
       role: "Mobile Developer",
     },
-    onRemove: () => {},
+    onRemove: fn(),
   },
 };
 
@@ -61,11 +71,18 @@ export const Pressable: Story = {
       name: "Carlos Rodrigues",
       role: "Software Engineer",
     },
-    onPress: () => {},
+    onPress: fn(),
   },
 };
 
 export const MemberList: Story = {
+  args: {
+    member: {
+      id: "1",
+      name: "João Silva",
+      role: "React Native Developer",
+    },
+  },
   render: () => (
     <View style={{ gap: 12 }}>
       <MemberCard
