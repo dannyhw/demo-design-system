@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { HomeScreen } from './HomeScreen';
+import type { Meta, StoryObj } from "@storybook/react";
+import { HomeScreen } from "./HomeScreen";
 
 const meta = {
-  title: 'Screens/HomeScreen',
+  title: "Screens/HomeScreen",
   component: HomeScreen,
   parameters: {
     noSafeArea: true,
@@ -22,31 +22,31 @@ const futureDate = (daysFromNow: number) => {
 
 const sampleEvents = [
   {
-    id: '1',
-    title: 'React Native Performance Workshop',
-    description: 'Deep dive into performance optimization.',
+    id: "1",
+    title: "React Native Performance Workshop",
+    description: "Deep dive into performance optimization.",
     date: futureDate(7),
-    location: 'Porto Tech Hub',
-    attendees: [{ name: 'João' }, { name: 'Maria' }, { name: 'Pedro' }],
+    location: "Porto Tech Hub",
+    attendees: [{ name: "João" }, { name: "Maria" }, { name: "Pedro" }],
     maxAttendees: 30,
   },
   {
-    id: '2',
-    title: 'Expo SDK Deep Dive',
-    description: 'Exploring the latest Expo features.',
+    id: "2",
+    title: "Expo SDK Deep Dive",
+    description: "Exploring the latest Expo features.",
     date: futureDate(14),
-    location: 'Online',
+    location: "Online",
     isOnline: true,
-    attendees: [{ name: 'Ana' }, { name: 'Carlos' }],
+    attendees: [{ name: "Ana" }, { name: "Carlos" }],
   },
 ];
 
 const sampleMembers = [
-  { id: '1', name: 'Maria Santos', role: 'Community Lead', isOrganizer: true },
-  { id: '2', name: 'João Silva', role: 'React Native Developer' },
-  { id: '3', name: 'Pedro Costa', role: 'Mobile Engineer' },
-  { id: '4', name: 'Ana Ferreira', role: 'Software Engineer' },
-  { id: '5', name: 'Carlos Rodrigues', role: 'Tech Lead' },
+  { id: "1", name: "Maria Santos", role: "Community Lead", isOrganizer: true },
+  { id: "2", name: "João Silva", role: "React Native Developer" },
+  { id: "3", name: "Pedro Costa", role: "Mobile Engineer" },
+  { id: "4", name: "Ana Ferreira", role: "Software Engineer" },
+  { id: "5", name: "Carlos Rodrigues", role: "Tech Lead" },
 ];
 
 export const Default: Story = {

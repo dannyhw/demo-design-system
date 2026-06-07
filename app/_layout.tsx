@@ -1,7 +1,10 @@
 import { Stack } from "expo-router";
+import { LogBox } from "react-native";
 import { ThemeProvider, DarkTheme } from "expo-router/react-navigation";
 import { colors } from "../components/theme";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+
+LogBox.ignoreAllLogs();
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",

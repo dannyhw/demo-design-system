@@ -7,6 +7,16 @@ const meta = {
   title: "Design System/Button",
   component: Button,
   args: { onPress: fn() },
+  argTypes: {
+    variant: {
+      options: ["primary", "secondary", "ghost", "danger"],
+      control: { type: "radio" },
+    },
+    size: {
+      options: ["sm", "md", "lg"],
+      control: { type: "radio" },
+    },
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;

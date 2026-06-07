@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { AddMemberForm } from './AddMemberForm';
+import type { Meta, StoryObj } from "@storybook/react";
+import { AddMemberForm } from "./AddMemberForm";
 
 const meta = {
-  title: 'Screens/AddMemberForm',
+  title: "Screens/AddMemberForm",
   component: AddMemberForm,
   parameters: {
     noSafeArea: true,
@@ -15,21 +15,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    onSubmit: (data) => console.log('Submit:', data),
+    onSubmit: (data) => console.log("Submit:", data),
   },
 };
 
 export const WithCancel: Story = {
   args: {
-    onSubmit: (data) => console.log('Submit:', data),
-    onCancel: () => console.log('Cancel'),
+    onSubmit: (data) => console.log("Submit:", data),
+    onCancel: () => console.log("Cancel"),
   },
 };
 
 export const Loading: Story = {
   args: {
-    onSubmit: (data) => console.log('Submit:', data),
-    onCancel: () => console.log('Cancel'),
+    onSubmit: (data) => console.log("Submit:", data),
+    onCancel: () => console.log("Cancel"),
     isLoading: true,
   },
 };
