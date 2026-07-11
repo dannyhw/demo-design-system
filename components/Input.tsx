@@ -30,6 +30,8 @@ export const Input = ({
   onClear,
   onFocus,
   onBlur,
+  editable = true,
+  placeholderTextColor = colors.foregroundTertiary,
   ...props
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -50,14 +52,15 @@ export const Input = ({
       >
         {prefix && <View style={styles.prefix}>{prefix}</View>}
         <TextInput
+          {...props}
           style={[
             styles.input,
             !!prefix && styles.inputWithPrefix,
             !!suffix && styles.inputWithSuffix,
           ]}
-          placeholderTextColor={colors.foregroundTertiary}
+          placeholderTextColor={placeholderTextColor}
           value={value}
-          editable={!disabled}
+          editable={!disabled && editable}
           onFocus={(event) => {
             setIsFocused(true);
             onFocus?.(event);
@@ -66,7 +69,6 @@ export const Input = ({
             setIsFocused(false);
             onBlur?.(event);
           }}
-          {...props}
         />
         {suffix && <View style={styles.suffix}>{suffix}</View>}
         {onClear && value ? (

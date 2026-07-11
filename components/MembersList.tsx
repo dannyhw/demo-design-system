@@ -1,4 +1,5 @@
 import { StyleSheet, View, ScrollView } from "react-native";
+import { SectionList } from "@legendapp/list/section-list";
 import { MemberCard, Member } from "./MemberCard";
 import { SectionHeader } from "./SectionHeader";
 import { EmptyState } from "./EmptyState";
@@ -11,6 +12,11 @@ export interface MembersListProps {
   onAddMember?: () => void;
 }
 
+interface MemberSection {
+  title: string;
+  data: Member[];
+}
+
 export const MembersList = ({
   members,
   onMemberPress,
@@ -19,6 +25,14 @@ export const MembersList = ({
 }: MembersListProps) => {
   const organizers = members.filter((m) => m.isOrganizer);
   const regularMembers = members.filter((m) => !m.isOrganizer);
+  const sections: MemberSection[] = [
+    ...(organizers.length > 0
+      ? [{ title: "Organizers", data: organizers }]
+      : []),
+    ...(regularMembers.length > 0
+      ? [{ title: "Members", data: regularMembers }]
+      : []),
+  ];
 
   if (members.length === 0) {
     return (
@@ -35,59 +49,36 @@ export const MembersList = ({
   }
 
   return (
-    <ScrollView
+    <SectionList<Member, MemberSection>
+      sections={sections}
       contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={styles.content}
-    >
-      {organizers.length > 0 && (
-        <View>
-          <SectionHeader title="Organizers" count={organizers.length} />
-          <View style={styles.list}>
-            {organizers.map((member) => (
-              <MemberCard
-                key={member.id}
-                member={member}
-                onPress={
-                  onMemberPress ? () => onMemberPress(member) : undefined
-                }
-                onRemove={
-                  onRemoveMember ? () => onRemoveMember(member) : undefined
-                }
-              />
-            ))}
-          </View>
-        </View>
+      keyExtractor={(member) => member.id}
+      renderSectionHeader={({ section }) => (
+        <SectionHeader title={section.title} count={section.data.length} />
       )}
-
-      {regularMembers.length > 0 && (
-        <View>
-          <SectionHeader title="Members" count={regularMembers.length} />
-          <View style={styles.list}>
-            {regularMembers.map((member) => (
-              <MemberCard
-                key={member.id}
-                member={member}
-                onPress={
-                  onMemberPress ? () => onMemberPress(member) : undefined
-                }
-                onRemove={
-                  onRemoveMember ? () => onRemoveMember(member) : undefined
-                }
-              />
-            ))}
-          </View>
-        </View>
+      renderItem={({ item: member }) => (
+        <MemberCard
+          member={member}
+          onPress={onMemberPress ? () => onMemberPress(member) : undefined}
+          onRemove={onRemoveMember ? () => onRemoveMember(member) : undefined}
+        />
       )}
-    </ScrollView>
+      ItemSeparatorComponent={ItemSeparator}
+      SectionSeparatorComponent={SectionSeparator}
+      stickySectionHeadersEnabled={false}
+      recycleItems
+    />
   );
 };
+
+const ItemSeparator = () => <View style={styles.itemSeparator} />;
+const SectionSeparator = () => <View style={styles.sectionSeparator} />;
 
 const styles = StyleSheet.create({
   content: {
     padding: spacing.lg,
-    gap: spacing.xl,
   },
-  list: {
-    gap: spacing.md,
-  },
+  itemSeparator: { height: spacing.md },
+  sectionSeparator: { height: spacing.xl },
 });

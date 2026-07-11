@@ -4,12 +4,8 @@ import {
   Text,
   type UniversalStyle,
 } from "@expo/ui";
-import {
-  buttonStyle,
-  clipShape,
-  strokeBorder,
-} from "@expo/ui/swift-ui/modifiers";
 import { colors, radius, spacing } from "./theme";
+import { getButtonModifiers } from "./ButtonModifiers";
 
 export interface ButtonProps {
   variant?: "primary" | "secondary" | "ghost" | "danger";
@@ -36,7 +32,7 @@ export const Button = ({
   return (
     <Host
       matchContents={{ vertical: true, horizontal: !fullWidth }}
-      style={fullWidth ? { alignSelf: "stretch" } : undefined}
+      style={fullWidth ? { alignSelf: "stretch", width: "100%" } : undefined}
       colorScheme="dark"
       seedColor={variantSeedColors[variant]}
     >
@@ -50,20 +46,12 @@ export const Button = ({
           ...(fullWidth ? { width: "100%" as const } : undefined),
           ...(isDisabled ? { opacity: 0.5 } : undefined),
         }}
-        modifiers={[
-          buttonStyle("plain"),
-          clipShape("roundedRectangle", radius.md),
-          ...(variant === "secondary"
-            ? [
-                strokeBorder({
-                  color: colors.border,
-                  style: { lineWidth: 1 },
-                  shape: "roundedRectangle",
-                  cornerRadius: radius.md,
-                }),
-              ]
-            : []),
-        ]}
+        modifiers={getButtonModifiers({
+          variant,
+          size,
+          fullWidth,
+          isDisabled,
+        })}
       >
         <Text
           textStyle={{
@@ -105,9 +93,9 @@ const variantStyles: Record<
 };
 
 const sizeStyles: Record<NonNullable<ButtonProps["size"]>, UniversalStyle> = {
-  sm: { height: 40, borderRadius: radius.md, paddingHorizontal: spacing.md },
-  md: { height: 48, borderRadius: radius.md, paddingHorizontal: spacing.lg },
-  lg: { height: 56, borderRadius: radius.md, paddingHorizontal: spacing.xl },
+  sm: { height: 32, borderRadius: radius.md, paddingHorizontal: spacing.md },
+  md: { height: 40, borderRadius: radius.md, paddingHorizontal: spacing.lg },
+  lg: { height: 48, borderRadius: radius.md, paddingHorizontal: spacing.xl },
 };
 
 const sizeTextSizes: Record<NonNullable<ButtonProps["size"]>, number> = {

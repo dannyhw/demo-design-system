@@ -1,4 +1,5 @@
 import { StyleSheet, View, ScrollView } from "react-native";
+import { SectionList } from "@legendapp/list/section-list";
 import { EventCard, Event } from "./EventCard";
 import { SectionHeader } from "./SectionHeader";
 import { EmptyState } from "./EmptyState";
@@ -9,6 +10,11 @@ export interface EventsListProps {
   onEventPress?: (event: Event) => void;
   onRSVP?: (event: Event) => void;
   onCreateEvent?: () => void;
+}
+
+interface EventSection {
+  title: string;
+  data: Event[];
 }
 
 const isUpcoming = (date: Date) => date.getTime() > Date.now();
@@ -22,6 +28,14 @@ export const EventsList = ({
 }: EventsListProps) => {
   const upcomingEvents = events.filter((e) => isUpcoming(e.date));
   const pastEvents = events.filter((e) => isPast(e.date));
+  const sections: EventSection[] = [
+    ...(upcomingEvents.length > 0
+      ? [{ title: "Upcoming", data: upcomingEvents }]
+      : []),
+    ...(pastEvents.length > 0
+      ? [{ title: "Past Events", data: pastEvents }]
+      : []),
+  ];
 
   if (events.length === 0) {
     return (
@@ -38,50 +52,40 @@ export const EventsList = ({
   }
 
   return (
-    <ScrollView
+    <SectionList<Event, EventSection>
+      sections={sections}
       contentInsetAdjustmentBehavior="automatic"
       contentContainerStyle={styles.content}
-    >
-      {upcomingEvents.length > 0 && (
-        <View>
-          <SectionHeader title="Upcoming" count={upcomingEvents.length} />
-          <View style={styles.list}>
-            {upcomingEvents.map((event) => (
-              <EventCard
-                key={event.id}
-                event={event}
-                onPress={onEventPress ? () => onEventPress(event) : undefined}
-                onRSVP={onRSVP ? () => onRSVP(event) : undefined}
-              />
-            ))}
-          </View>
-        </View>
+      keyExtractor={(event) => event.id}
+      renderSectionHeader={({ section }) => (
+        <SectionHeader title={section.title} count={section.data.length} />
       )}
-
-      {pastEvents.length > 0 && (
-        <View>
-          <SectionHeader title="Past Events" count={pastEvents.length} />
-          <View style={styles.list}>
-            {pastEvents.map((event) => (
-              <EventCard
-                key={event.id}
-                event={event}
-                onPress={onEventPress ? () => onEventPress(event) : undefined}
-              />
-            ))}
-          </View>
-        </View>
+      renderItem={({ item: event, section }) => (
+        <EventCard
+          event={event}
+          onPress={onEventPress ? () => onEventPress(event) : undefined}
+          onRSVP={
+            section.title === "Upcoming" && onRSVP
+              ? () => onRSVP(event)
+              : undefined
+          }
+        />
       )}
-    </ScrollView>
+      ItemSeparatorComponent={ItemSeparator}
+      SectionSeparatorComponent={SectionSeparator}
+      stickySectionHeadersEnabled={false}
+      recycleItems
+    />
   );
 };
+
+const ItemSeparator = () => <View style={styles.itemSeparator} />;
+const SectionSeparator = () => <View style={styles.sectionSeparator} />;
 
 const styles = StyleSheet.create({
   content: {
     padding: spacing.lg,
-    gap: spacing.xl,
   },
-  list: {
-    gap: spacing.lg,
-  },
+  itemSeparator: { height: spacing.lg },
+  sectionSeparator: { height: spacing.xl },
 });
