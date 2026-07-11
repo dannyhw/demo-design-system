@@ -1,5 +1,6 @@
 import { Text as ExpoText, Host } from "@expo/ui";
 import type { UniversalTextStyle } from "@expo/ui";
+import { frame } from "@expo/ui/swift-ui/modifiers";
 import { Children } from "react";
 import {
   type StyleProp,
@@ -51,6 +52,11 @@ export const Text = ({
           ...textStyle,
         }}
         numberOfLines={numberOfLines}
+        modifiers={
+          isWidthConstrained
+            ? [frame({ maxWidth: Infinity, alignment: "leading" })]
+            : undefined
+        }
         onPress={onPress ? () => onPress({} as never) : undefined}
         testID={testID}
       >
