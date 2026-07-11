@@ -1,6 +1,4 @@
-import { Stack, useRouter } from "expo-router";
-import { Pressable } from "react-native";
-import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 import { HomeScreen } from "../../../components";
 import { members, events } from "../../../mocks/mock-data";
 
@@ -14,6 +12,7 @@ export default function Home() {
       totalMembers={members.length}
       onViewAllEvents={() => router.push("/(tabs)/(events)")}
       onViewAllMembers={() => router.push("/(tabs)/(members)")}
+      onEventPress={(event) => router.push(`/(tabs)/(events)/${event.id}`)}
       onMemberPress={(member) => router.push(`/(tabs)/(members)/${member.id}`)}
     />
   );

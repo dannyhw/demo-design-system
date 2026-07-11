@@ -1,4 +1,4 @@
-import { StyleSheet, View, ViewProps, TouchableOpacity } from 'react-native';
+import { Pressable, StyleSheet, View, ViewProps } from 'react-native';
 import { colors, spacing, radius, shadows } from './theme';
 
 export interface CardProps extends ViewProps {
@@ -24,6 +24,7 @@ export const Card = ({
         style,
       ]}
       {...props}
+      pointerEvents={onPress ? 'none' : props.pointerEvents}
     >
       {children}
     </View>
@@ -31,9 +32,13 @@ export const Card = ({
 
   if (onPress) {
     return (
-      <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+      <Pressable
+        accessibilityRole="button"
+        onPress={onPress}
+        style={({ pressed }) => pressed && styles.pressed}
+      >
         {content}
-      </TouchableOpacity>
+      </Pressable>
     );
   }
 
@@ -44,6 +49,9 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: radius.lg,
     overflow: 'hidden',
+  },
+  pressed: {
+    opacity: 0.8,
   },
 });
 

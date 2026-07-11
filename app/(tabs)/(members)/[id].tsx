@@ -1,8 +1,9 @@
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { MemberProfile } from "../../../components";
 import { members, eventsAttendedByMember } from "../../../mocks/mock-data";
 
 export default function MemberProfilePage() {
+  const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
 
   const member = members.find((m) => m.id === id);
@@ -15,6 +16,9 @@ export default function MemberProfilePage() {
     <MemberProfile
       member={member}
       eventsAttended={eventsAttendedByMember[member.id] ?? []}
+      onEventPress={(event) =>
+        router.push(`/(tabs)/(events)/${event.id}`)
+      }
     />
   );
 }

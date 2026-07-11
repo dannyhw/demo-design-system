@@ -1,10 +1,11 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { colors, EventsList } from "../../../components";
 import { events } from "../../../mocks/mock-data";
 import { useState } from "react";
 import { stackScreenOptions } from "../../../utils/navigation";
 
 export default function Events() {
+  const router = useRouter();
   const [search, setSearch] = useState("");
   return (
     <>
@@ -24,6 +25,9 @@ export default function Events() {
         events={events.filter((event) =>
           event.title.toLowerCase().includes(search.toLowerCase()),
         )}
+        onEventPress={(event) =>
+          router.push(`/(tabs)/(events)/${event.id}`)
+        }
       />
     </>
   );

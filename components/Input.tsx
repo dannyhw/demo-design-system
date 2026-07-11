@@ -1,159 +1,84 @@
-import { useState } from "react";
-import {
-  StyleSheet,
-  TextInput,
-  TextInputProps,
-  View,
-  TouchableOpacity,
-} from "react-native";
-import { Text } from "./Text";
+import { Column, Host, Text as ExpoText, TextInput as ExpoTextInput, useNativeState, type UniversalStyle } from "@expo/ui";
+import { useEffect } from "react";
+import { type TextInputProps as RNTextInputProps } from "react-native";
 import { colors, spacing, radius, typography } from "./theme";
 
-export interface InputProps extends Omit<TextInputProps, "style"> {
+export interface InputProps extends Omit<RNTextInputProps, "style" | "onFocus" | "onBlur"> {
   label?: string;
-  placeholder?: string;
   error?: string;
   hint?: string;
   disabled?: boolean;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   onClear?: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }
 
 export const Input = ({
-  label,
-  placeholder,
-  error,
-  hint,
-  disabled = false,
-  prefix,
-  suffix,
-  value,
-  onClear,
-  onFocus,
-  onBlur,
-  ...props
+  label, placeholder, error, hint, disabled = false, value = "", onChangeText,
+  onFocus, onBlur, autoCapitalize, autoCorrect, autoFocus, keyboardType,
+  multiline, secureTextEntry, returnKeyType, maxLength, testID,
 }: InputProps) => {
-  const [isFocused, setIsFocused] = useState(false);
+  const nativeValue = useNativeState(String(value));
 
-  const handleFocus = (e: any) => {
-    setIsFocused(true);
-    onFocus?.(e);
-  };
-
-  const handleBlur = (e: any) => {
-    setIsFocused(false);
-    onBlur?.(e);
-  };
+  useEffect(() => {
+    // Expo UI's observable state intentionally exposes a mutable native value.
+    // eslint-disable-next-line react-hooks/immutability
+    nativeValue.value = String(value);
+  }, [nativeValue, value]);
 
   return (
-    <View style={styles.container}>
-      {label && (
-        <Text variant="label" color="secondary" style={styles.label}>
-          {label}
-        </Text>
-      )}
-      <View
-        style={[
-          styles.inputWrapper,
-          isFocused && styles.inputWrapperFocused,
-          error && styles.inputWrapperError,
-          disabled && styles.inputWrapperDisabled,
-        ]}
-      >
-        {prefix && <View style={styles.prefix}>{prefix}</View>}
-        <TextInput
-          style={[
-            styles.input,
-            !!prefix && styles.inputWithPrefix,
-            !!suffix && styles.inputWithSuffix,
-          ]}
+    <Host
+      matchContents={{ vertical: true, horizontal: false }}
+      style={{ alignSelf: "stretch", opacity: disabled ? 0.5 : 1 }}
+      colorScheme="dark"
+      seedColor={error ? colors.error : colors.foreground}
+    >
+      <Column spacing={spacing.sm}>
+        {label && (
+          <ExpoText textStyle={labelTextStyle}>{label}</ExpoText>
+        )}
+        <ExpoTextInput
+          value={nativeValue}
+          onChangeText={onChangeText}
           placeholder={placeholder}
           placeholderTextColor={colors.foregroundTertiary}
-          value={value}
           editable={!disabled}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          {...props}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          autoCapitalize={autoCapitalize}
+          autoCorrect={autoCorrect}
+          autoFocus={autoFocus}
+          keyboardType={keyboardType}
+          multiline={multiline}
+          secureTextEntry={secureTextEntry}
+          returnKeyType={returnKeyType}
+          maxLength={maxLength}
+          testID={testID}
+          cursorColor={error ? colors.error : colors.foreground}
+          style={{ ...inputStyle, ...(error ? inputErrorStyle : undefined) }}
+          textStyle={inputTextStyle}
         />
-        {suffix && <View style={styles.suffix}>{suffix}</View>}
-        {onClear && value && (
-          <TouchableOpacity onPress={onClear} style={styles.clearButton}>
-            <Text color="tertiary" style={styles.clearIcon}>
-              ×
-            </Text>
-          </TouchableOpacity>
-        )}
-      </View>
-      {error && (
-        <Text variant="caption" color="error" style={styles.errorText}>
-          {error}
-        </Text>
-      )}
-      {hint && !error && (
-        <Text variant="caption" color="tertiary" style={styles.hintText}>
-          {hint}
-        </Text>
-      )}
-    </View>
+        {error && <ExpoText textStyle={errorTextStyle}>{error}</ExpoText>}
+        {hint && !error && <ExpoText textStyle={hintTextStyle}>{hint}</ExpoText>}
+      </Column>
+    </Host>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-  },
-  label: {
-    marginBottom: spacing.sm,
-  },
-  inputWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: colors.backgroundSecondary,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radius.md,
-    minHeight: 40,
-  },
-  inputWrapperFocused: {
-    borderColor: colors.foreground,
-  },
-  inputWrapperError: {
-    borderColor: colors.error,
-  },
-  inputWrapperDisabled: {
-    opacity: 0.5,
-  },
-  input: {
-    flex: 1,
-    color: colors.foreground,
-    fontSize: typography.fontSize.md,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.md,
-  },
-  inputWithPrefix: {
-    paddingLeft: spacing.xs,
-  },
-  inputWithSuffix: {
-    paddingRight: spacing.xs,
-  },
-  prefix: {
-    paddingLeft: spacing.md,
-  },
-  suffix: {
-    paddingRight: spacing.md,
-  },
-  clearButton: {
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
-  },
-  clearIcon: {
-    fontSize: 18,
-  },
-  errorText: {
-    marginTop: spacing.sm,
-  },
-  hintText: {
-    marginTop: spacing.sm,
-  },
-});
+const inputStyle: UniversalStyle = {
+  height: 44,
+  paddingHorizontal: spacing.md,
+  paddingVertical: spacing.md,
+  backgroundColor: colors.backgroundSecondary,
+  borderWidth: 1,
+  borderColor: colors.border,
+  borderRadius: radius.md,
+};
+
+const inputErrorStyle: UniversalStyle = { borderColor: colors.error };
+const inputTextStyle = { color: colors.foreground, fontSize: typography.fontSize.md };
+const labelTextStyle = { color: colors.foregroundSecondary, fontSize: typography.fontSize.sm, fontWeight: "500" as const };
+const errorTextStyle = { color: colors.error, fontSize: typography.fontSize.xs };
+const hintTextStyle = { color: colors.foregroundTertiary, fontSize: typography.fontSize.xs };

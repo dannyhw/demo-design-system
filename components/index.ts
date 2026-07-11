@@ -37,6 +37,9 @@ export type { MemberCardProps, Member } from "./MemberCard";
 export { EventCard } from "./EventCard";
 export type { EventCardProps, Event } from "./EventCard";
 
+export { EventDetails } from "./EventDetails";
+export type { EventDetailsProps } from "./EventDetails";
+
 export { EmptyState } from "./EmptyState";
 export type { EmptyStateProps } from "./EmptyState";
 

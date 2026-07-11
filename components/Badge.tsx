@@ -1,93 +1,59 @@
-import { StyleSheet, View } from 'react-native';
-import { Text } from './Text';
-import { colors, spacing, radius } from './theme';
+import { Host, Row, Text as ExpoText, type UniversalStyle } from "@expo/ui";
+import { colors, spacing, radius } from "./theme";
 
 export interface BadgeProps {
-  variant?: 'default' | 'success' | 'warning' | 'error' | 'accent';
-  size?: 'sm' | 'md';
+  variant?: "default" | "success" | "warning" | "error" | "accent";
+  size?: "sm" | "md";
   label: string;
 }
 
 export const Badge = ({
-  variant = 'default',
-  size = 'md',
+  variant = "default",
+  size = "md",
   label,
-}: BadgeProps) => {
-  return (
-    <View style={[styles.badge, variantStyles[variant], sizeStyles[size]]}>
-      <Text
-        style={[styles.label, variantTextStyles[variant], sizeTextStyles[size]]}
+}: BadgeProps) => (
+  <Host matchContents colorScheme="dark">
+    <Row style={{ ...variantStyles[variant], ...sizeStyles[size] }}>
+      <ExpoText
+        textStyle={{
+          fontWeight: "500",
+          color: variantTextColors[variant],
+          fontSize: sizeTextSizes[size],
+        }}
       >
         {label}
-      </Text>
-    </View>
-  );
-};
+      </ExpoText>
+    </Row>
+  </Host>
+);
 
-const styles = StyleSheet.create({
-  badge: {
-    alignSelf: 'flex-start',
-    borderRadius: radius.full,
-  },
-  label: {
-    fontWeight: '500',
-  },
-});
-
-const variantStyles = StyleSheet.create({
+const variantStyles: Record<NonNullable<BadgeProps["variant"]>, UniversalStyle> = {
   default: {
     backgroundColor: colors.backgroundTertiary,
     borderWidth: 1,
     borderColor: colors.border,
+    borderRadius: radius.full,
   },
-  success: {
-    backgroundColor: colors.successLight,
-  },
-  warning: {
-    backgroundColor: colors.warningLight,
-  },
-  error: {
-    backgroundColor: colors.errorLight,
-  },
-  accent: {
-    backgroundColor: colors.accentLight,
-  },
-});
+  success: { backgroundColor: colors.successLight, borderRadius: radius.full },
+  warning: { backgroundColor: colors.warningLight, borderRadius: radius.full },
+  error: { backgroundColor: colors.errorLight, borderRadius: radius.full },
+  accent: { backgroundColor: colors.accentLight, borderRadius: radius.full },
+};
 
-const variantTextStyles = StyleSheet.create({
-  default: {
-    color: colors.foregroundSecondary,
-  },
-  success: {
-    color: colors.success,
-  },
-  warning: {
-    color: colors.warning,
-  },
-  error: {
-    color: colors.error,
-  },
-  accent: {
-    color: colors.accent,
-  },
-});
+const sizeStyles: Record<NonNullable<BadgeProps["size"]>, UniversalStyle> = {
+  sm: { paddingVertical: spacing.xs, paddingHorizontal: spacing.sm },
+  md: { paddingVertical: spacing.xs + 2, paddingHorizontal: spacing.md },
+};
 
-const sizeStyles = StyleSheet.create({
-  sm: {
-    paddingVertical: spacing.xs,
-    paddingHorizontal: spacing.sm,
-  },
-  md: {
-    paddingVertical: spacing.xs + 2,
-    paddingHorizontal: spacing.md,
-  },
-});
+const variantTextColors: Record<NonNullable<BadgeProps["variant"]>, string> = {
+  default: colors.foregroundSecondary,
+  success: colors.success,
+  warning: colors.warning,
+  error: colors.error,
+  accent: colors.accent,
+};
 
-const sizeTextStyles = StyleSheet.create({
-  sm: {
-    fontSize: 10,
-  },
-  md: {
-    fontSize: 12,
-  },
-});
+const sizeTextSizes: Record<NonNullable<BadgeProps["size"]>, number> = {
+  sm: 10,
+  md: 12,
+};

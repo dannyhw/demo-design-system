@@ -1,6 +1,6 @@
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { Text } from './Text';
-import { colors, spacing } from './theme';
+import { StyleSheet, View } from "react-native";
+import { Text } from "./Text";
+import { colors, spacing } from "./theme";
 
 export interface SectionHeaderProps {
   title: string;
@@ -14,45 +14,42 @@ export const SectionHeader = ({
   action,
   onAction,
   count,
-}: SectionHeaderProps) => {
-  return (
-    <View style={styles.container}>
-      <View style={styles.titleRow}>
-        <Text variant="label" color="secondary" style={styles.title}>
-          {title.toUpperCase()}
-        </Text>
-        {count !== undefined && (
-          <View style={styles.countBadge}>
-            <Text variant="caption" color="secondary">
-              {count}
-            </Text>
-          </View>
-        )}
-      </View>
-      {action && onAction && (
-        <TouchableOpacity onPress={onAction}>
-          <Text variant="bodySmall" color="accent">
-            {action}
+}: SectionHeaderProps) => (
+  <View style={styles.container}>
+    <View style={styles.titleRow}>
+      <Text
+        variant="label"
+        color="secondary"
+        textStyle={{ letterSpacing: 0.5 }}
+      >
+        {title.toUpperCase()}
+      </Text>
+      {count !== undefined && (
+        <View style={styles.countBadge}>
+          <Text variant="caption" color="secondary">
+            {count}
           </Text>
-        </TouchableOpacity>
+        </View>
       )}
     </View>
-  );
-};
+    {action && onAction && (
+      <Text variant="bodySmall" color="accent" onPress={onAction}>
+        {action}
+      </Text>
+    )}
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: spacing.sm,
   },
   titleRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  title: {
-    letterSpacing: 0.5,
+    flexDirection: "row",
+    alignItems: "center",
   },
   countBadge: {
     marginLeft: spacing.sm,

@@ -1,5 +1,4 @@
 import { Stack } from "expo-router/stack";
-import { colors } from "../../../components/theme";
 
 export default function EventsStack() {
   return (
@@ -9,6 +8,7 @@ export default function EventsStack() {
       }}
     >
       <Stack.Screen name="index" options={{ title: "Events" }} />
+      <Stack.Screen name="[id]" options={{ title: "Event", headerLargeTitle: false }} />
     </Stack>
   );
 }

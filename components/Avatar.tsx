@@ -74,7 +74,9 @@ export const Avatar = ({
         showBorder && styles.border,
       ]}
     >
-      <Text style={[styles.initials, { fontSize }]}>{getInitials(name)}</Text>
+      <Text textStyle={{ color: colors.white, fontWeight: "600", fontSize }}>
+        {getInitials(name)}
+      </Text>
     </View>
   );
 };
@@ -108,9 +110,5 @@ const styles = StyleSheet.create({
   placeholder: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  initials: {
-    color: colors.white,
-    fontWeight: '600',
   },
 });

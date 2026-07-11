@@ -1,12 +1,8 @@
 import { Stack, useRouter } from "expo-router";
-import { Platform, Pressable } from "react-native";
-import { Image } from "expo-image";
-import { MembersList } from "../../../components";
+import { Button, MembersList } from "../../../components";
 import { members } from "../../../mocks/mock-data";
 import { colors } from "../../../components/theme";
 import { useState } from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { SF_SYMBOLS_TO_MATERIAL_COMMUNITY_ICONS } from "rn-icon-mapper";
 import { stackScreenOptions } from "../../../utils/navigation";
 
 export default function Members() {
@@ -19,25 +15,12 @@ export default function Members() {
         options={{
           ...stackScreenOptions,
           headerRight: () => (
-            <Pressable
+            <Button
+              variant="ghost"
+              size="sm"
+              label="Add"
               onPress={() => router.navigate("/(tabs)/(members)/add-member")}
-            >
-              {Platform.OS === "ios" ? (
-                <Image
-                  source="sf:person.badge.plus"
-                  style={{ width: 22, height: 22 }}
-                  tintColor={colors.foregroundSecondary}
-                />
-              ) : (
-                <MaterialCommunityIcons
-                  name={
-                    SF_SYMBOLS_TO_MATERIAL_COMMUNITY_ICONS["person.badge.plus"]
-                  }
-                  size={22}
-                  color={colors.foregroundSecondary}
-                />
-              )}
-            </Pressable>
+            />
           ),
           headerSearchBarOptions: {
             placeholder: "Search members",

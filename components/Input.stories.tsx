@@ -92,19 +92,21 @@ export const WithPrefix: Story = {
   },
 };
 
+const ClearButtonExample = () => {
+  const [value, setValue] = useState('Clear me');
+  return (
+    <Input
+      label="Search"
+      placeholder="Search..."
+      value={value}
+      onChangeText={setValue}
+      onClear={() => setValue('')}
+    />
+  );
+};
+
 export const WithClearButton: Story = {
-  render: () => {
-    const [value, setValue] = useState('Clear me');
-    return (
-      <Input
-        label="Search"
-        placeholder="Search..."
-        value={value}
-        onChangeText={setValue}
-        onClear={() => setValue('')}
-      />
-    );
-  },
+  render: () => <ClearButtonExample />,
 };
 
 export const FormExample: Story = {
