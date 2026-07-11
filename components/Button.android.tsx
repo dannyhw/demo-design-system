@@ -8,17 +8,9 @@ import {
 } from "@expo/ui/jetpack-compose";
 import { fillMaxWidth, height } from "@expo/ui/jetpack-compose/modifiers";
 import { colors, radius } from "./theme";
+import type { ButtonProps } from "./Button.types";
 
-export interface ButtonProps {
-  variant?: "primary" | "secondary" | "ghost" | "danger";
-  size?: "sm" | "md" | "lg";
-  label: string;
-  onPress?: () => void;
-  disabled?: boolean;
-  loading?: boolean;
-  fullWidth?: boolean;
-  icon?: React.ReactNode;
-}
+export type { ButtonProps } from "./Button.types";
 
 export const Button = ({
   variant = "primary",
