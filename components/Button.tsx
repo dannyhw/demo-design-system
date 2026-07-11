@@ -1,5 +1,15 @@
-import { Button as ExpoButton, Host, Text, type UniversalStyle } from "@expo/ui";
-import { colors, radius } from "./theme";
+import {
+  Button as ExpoButton,
+  Host,
+  Text,
+  type UniversalStyle,
+} from "@expo/ui";
+import {
+  buttonStyle,
+  clipShape,
+  strokeBorder,
+} from "@expo/ui/swift-ui/modifiers";
+import { colors, radius, spacing } from "./theme";
 
 export interface ButtonProps {
   variant?: "primary" | "secondary" | "ghost" | "danger";
@@ -31,13 +41,29 @@ export const Button = ({
       seedColor={variantSeedColors[variant]}
     >
       <ExpoButton
-        variant={nativeVariants[variant]}
+        variant="text"
         onPress={onPress}
         disabled={isDisabled}
         style={{
+          ...variantStyles[variant],
           ...sizeStyles[size],
+          ...(fullWidth ? { width: "100%" as const } : undefined),
           ...(isDisabled ? { opacity: 0.5 } : undefined),
         }}
+        modifiers={[
+          buttonStyle("plain"),
+          clipShape("roundedRectangle", radius.md),
+          ...(variant === "secondary"
+            ? [
+                strokeBorder({
+                  color: colors.border,
+                  style: { lineWidth: 1 },
+                  shape: "roundedRectangle",
+                  cornerRadius: radius.md,
+                }),
+              ]
+            : []),
+        ]}
       >
         <Text
           textStyle={{
@@ -54,13 +80,6 @@ export const Button = ({
   );
 };
 
-const nativeVariants = {
-  primary: "filled",
-  secondary: "outlined",
-  ghost: "text",
-  danger: "filled",
-} as const;
-
 const variantSeedColors: Record<NonNullable<ButtonProps["variant"]>, string> = {
   primary: colors.white,
   secondary: colors.foreground,
@@ -75,10 +94,20 @@ const variantTextColors: Record<NonNullable<ButtonProps["variant"]>, string> = {
   danger: colors.white,
 };
 
+const variantStyles: Record<
+  NonNullable<ButtonProps["variant"]>,
+  UniversalStyle
+> = {
+  primary: { backgroundColor: colors.white },
+  secondary: { backgroundColor: "transparent" },
+  ghost: { backgroundColor: "transparent" },
+  danger: { backgroundColor: colors.error },
+};
+
 const sizeStyles: Record<NonNullable<ButtonProps["size"]>, UniversalStyle> = {
-  sm: { height: 32, borderRadius: radius.md },
-  md: { height: 40, borderRadius: radius.md },
-  lg: { height: 48, borderRadius: radius.md },
+  sm: { height: 40, borderRadius: radius.md, paddingHorizontal: spacing.md },
+  md: { height: 48, borderRadius: radius.md, paddingHorizontal: spacing.lg },
+  lg: { height: 56, borderRadius: radius.md, paddingHorizontal: spacing.xl },
 };
 
 const sizeTextSizes: Record<NonNullable<ButtonProps["size"]>, number> = {

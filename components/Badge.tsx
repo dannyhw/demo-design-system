@@ -1,4 +1,5 @@
-import { Host, Row, Text as ExpoText, type UniversalStyle } from "@expo/ui";
+import { StyleSheet, View } from "react-native";
+import { Text } from "./Text";
 import { colors, spacing, radius } from "./theme";
 
 export interface BadgeProps {
@@ -12,48 +13,42 @@ export const Badge = ({
   size = "md",
   label,
 }: BadgeProps) => (
-  <Host matchContents colorScheme="dark">
-    <Row style={{ ...variantStyles[variant], ...sizeStyles[size] }}>
-      <ExpoText
-        textStyle={{
-          fontWeight: "500",
-          color: variantTextColors[variant],
-          fontSize: sizeTextSizes[size],
-        }}
-      >
-        {label}
-      </ExpoText>
-    </Row>
-  </Host>
+  <View style={[styles.badge, variantStyles[variant], sizeStyles[size]]}>
+    <Text
+      style={[styles.label, variantTextStyles[variant], sizeTextStyles[size]]}
+    >
+      {label}
+    </Text>
+  </View>
 );
 
-const variantStyles: Record<NonNullable<BadgeProps["variant"]>, UniversalStyle> = {
+const styles = StyleSheet.create({
+  badge: { alignSelf: "flex-start", borderRadius: radius.full },
+  label: { fontWeight: "500" },
+});
+const variantStyles = StyleSheet.create({
   default: {
     backgroundColor: colors.backgroundTertiary,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: radius.full,
   },
-  success: { backgroundColor: colors.successLight, borderRadius: radius.full },
-  warning: { backgroundColor: colors.warningLight, borderRadius: radius.full },
-  error: { backgroundColor: colors.errorLight, borderRadius: radius.full },
-  accent: { backgroundColor: colors.accentLight, borderRadius: radius.full },
-};
-
-const sizeStyles: Record<NonNullable<BadgeProps["size"]>, UniversalStyle> = {
+  success: { backgroundColor: colors.successLight },
+  warning: { backgroundColor: colors.warningLight },
+  error: { backgroundColor: colors.errorLight },
+  accent: { backgroundColor: colors.accentLight },
+});
+const variantTextStyles = StyleSheet.create({
+  default: { color: colors.foregroundSecondary },
+  success: { color: colors.success },
+  warning: { color: colors.warning },
+  error: { color: colors.error },
+  accent: { color: colors.accent },
+});
+const sizeStyles = StyleSheet.create({
   sm: { paddingVertical: spacing.xs, paddingHorizontal: spacing.sm },
   md: { paddingVertical: spacing.xs + 2, paddingHorizontal: spacing.md },
-};
-
-const variantTextColors: Record<NonNullable<BadgeProps["variant"]>, string> = {
-  default: colors.foregroundSecondary,
-  success: colors.success,
-  warning: colors.warning,
-  error: colors.error,
-  accent: colors.accent,
-};
-
-const sizeTextSizes: Record<NonNullable<BadgeProps["size"]>, number> = {
-  sm: 10,
-  md: 12,
-};
+});
+const sizeTextStyles = StyleSheet.create({
+  sm: { fontSize: 10 },
+  md: { fontSize: 12 },
+});

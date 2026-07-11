@@ -1,35 +1,35 @@
 export const colors = {
   // Backgrounds
-  background: '#0c0c0e',
-  backgroundSecondary: '#141416',
-  backgroundTertiary: '#1c1c1f',
-  backgroundHover: '#242428',
+  background: "#0c0c0e",
+  backgroundSecondary: "#141416",
+  backgroundTertiary: "#1c1c1f",
+  backgroundHover: "#242428",
 
   // Foregrounds
-  foreground: '#f0f0f2',
-  foregroundSecondary: '#9a9aa0',
-  foregroundTertiary: '#5e5e66',
+  foreground: "#f0f0f2",
+  foregroundSecondary: "#9a9aa0",
+  foregroundTertiary: "#5e5e66",
 
   // Borders
-  border: '#2c2c30',
-  borderLight: '#1e1e22',
+  border: "#2c2c30",
+  borderLight: "#1e1e22",
 
   // Accents
-  accent: '#0070f3',
-  accentHover: '#0060df',
-  accentLight: 'rgba(0, 112, 243, 0.1)',
+  accent: "#0070f3",
+  accentHover: "#0060df",
+  accentLight: "rgba(0, 112, 243, 0.1)",
 
   // Status
-  success: '#0070f3',
-  successLight: 'rgba(0, 112, 243, 0.1)',
-  warning: '#f5a623',
-  warningLight: 'rgba(245, 166, 35, 0.1)',
-  error: '#e00',
-  errorLight: 'rgba(238, 0, 0, 0.1)',
+  success: "#0070f3",
+  successLight: "rgba(0, 112, 243, 0.1)",
+  warning: "#f5a623",
+  warningLight: "rgba(245, 166, 35, 0.1)",
+  error: "#e00",
+  errorLight: "rgba(238, 0, 0, 0.1)",
 
   // Specific
-  white: '#f0f0f2',
-  black: '#0c0c0e',
+  white: "#f0f0f2",
+  black: "#0c0c0e",
 };
 
 export const spacing = {
@@ -76,21 +76,21 @@ export const typography = {
 
 export const shadows = {
   sm: {
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
   },
   md: {
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 8,
     elevation: 3,
   },
   lg: {
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.2,
     shadowRadius: 16,

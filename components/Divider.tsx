@@ -1,12 +1,12 @@
-import { StyleSheet, View, ViewProps } from 'react-native';
-import { colors, spacing } from './theme';
+import { StyleSheet, View, ViewProps } from "react-native";
+import { colors, spacing } from "./theme";
 
 export interface DividerProps extends ViewProps {
-  spacing?: 'none' | 'sm' | 'md' | 'lg';
+  spacing?: "none" | "sm" | "md" | "lg";
 }
 
 export const Divider = ({
-  spacing: spacingProp = 'md',
+  spacing: spacingProp = "md",
   style,
   ...props
 }: DividerProps) => {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
     backgroundColor: colors.borderLight,
-    width: '100%',
+    width: "100%",
   },
 });
 

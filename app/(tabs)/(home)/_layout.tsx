@@ -4,7 +4,10 @@ import { stackScreenOptions } from "../../../utils/navigation";
 export default function HomeStack() {
   return (
     <Stack screenOptions={{ headerLargeTitle: true }}>
-      <Stack.Screen name="index" options={stackScreenOptions} />
+      <Stack.Screen
+        name="index"
+        options={{ ...stackScreenOptions, title: "Home" }}
+      />
     </Stack>
   );
 }

@@ -1,15 +1,15 @@
-import { Pressable, StyleSheet, View, ViewProps } from 'react-native';
-import { colors, spacing, radius, shadows } from './theme';
+import { Pressable, StyleSheet, View, ViewProps } from "react-native";
+import { colors, spacing, radius, shadows } from "./theme";
 
 export interface CardProps extends ViewProps {
-  variant?: 'default' | 'elevated' | 'outlined';
-  padding?: 'none' | 'sm' | 'md' | 'lg';
+  variant?: "default" | "elevated" | "outlined";
+  padding?: "none" | "sm" | "md" | "lg";
   onPress?: () => void;
 }
 
 export const Card = ({
-  variant = 'default',
-  padding = 'md',
+  variant = "default",
+  padding = "md",
   onPress,
   style,
   children,
@@ -24,7 +24,6 @@ export const Card = ({
         style,
       ]}
       {...props}
-      pointerEvents={onPress ? 'none' : props.pointerEvents}
     >
       {children}
     </View>
@@ -48,7 +47,7 @@ export const Card = ({
 const styles = StyleSheet.create({
   card: {
     borderRadius: radius.lg,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   pressed: {
     opacity: 0.8,
@@ -66,7 +65,7 @@ const variantStyles = StyleSheet.create({
     ...shadows.md,
   },
   outlined: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     borderWidth: 1,
     borderColor: colors.border,
   },

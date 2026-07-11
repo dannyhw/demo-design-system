@@ -8,7 +8,10 @@ export default function EventsStack() {
       }}
     >
       <Stack.Screen name="index" options={{ title: "Events" }} />
-      <Stack.Screen name="[id]" options={{ title: "Event", headerLargeTitle: false }} />
+      <Stack.Screen
+        name="[id]"
+        options={{ title: "Event", headerLargeTitle: false }}
+      />
     </Stack>
   );
 }

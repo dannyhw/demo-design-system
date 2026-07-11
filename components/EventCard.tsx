@@ -13,7 +13,7 @@ export interface Event {
   description?: string;
   date: Date;
   location: string;
-  attendees?: { name: string; avatar?: string }[];
+  attendees?: { id?: string; name: string; avatar?: string }[];
   maxAttendees?: number;
   isOnline?: boolean;
 }
@@ -54,19 +54,18 @@ export const EventCard = ({ event, onPress, onRSVP }: EventCardProps) => {
           <Text variant="h2" color="primary" textStyle={{ lineHeight: 32 }}>
             {event.date.getDate()}
           </Text>
-          <Text variant="caption" color="secondary" textStyle={{ letterSpacing: 1 }}>
+          <Text
+            variant="caption"
+            color="secondary"
+            textStyle={{ letterSpacing: 1 }}
+          >
             {event.date
               .toLocaleDateString("en-US", { month: "short" })
               .toUpperCase()}
           </Text>
         </View>
         <View style={styles.headerContent}>
-          <Text
-            variant="h3"
-            weight="semibold"
-            align="left"
-            numberOfLines={2}
-          >
+          <Text variant="h3" weight="semibold" align="left" numberOfLines={2}>
             {event.title}
           </Text>
           <View style={styles.meta}>
@@ -98,14 +97,11 @@ export const EventCard = ({ event, onPress, onRSVP }: EventCardProps) => {
                 : SF_SYMBOLS_TO_MATERIAL_COMMUNITY_ICONS["mappin"] ||
                   "map-marker-outline") as any
             }
-            size={18}
+            size={14}
             color={colors.foregroundSecondary}
+            style={styles.locationIcon}
           />
-          <Text
-            variant="bodySmall"
-            color="secondary"
-            align="left"
-          >
+          <Text variant="bodySmall" color="secondary" align="left">
             {event.location}
           </Text>
         </View>
@@ -141,12 +137,7 @@ export const EventCard = ({ event, onPress, onRSVP }: EventCardProps) => {
         </View>
 
         {onRSVP && (
-          <Button
-            variant="primary"
-            size="sm"
-            label="RSVP"
-            onPress={onRSVP}
-          />
+          <Button variant="primary" size="sm" label="RSVP" onPress={onRSVP} />
         )}
       </View>
     </Card>
@@ -181,8 +172,9 @@ const styles = StyleSheet.create({
   locationRow: {
     flexDirection: "row",
     alignItems: "center",
-    gap: spacing.sm,
-    minHeight: 24,
+  },
+  locationIcon: {
+    marginRight: spacing.sm,
   },
   footer: {
     flexDirection: "row",

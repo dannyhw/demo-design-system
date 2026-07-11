@@ -1,23 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from 'storybook/test';
-import { View } from 'react-native';
-import { Card } from './Card';
-import { Text } from './Text';
+import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "storybook/test";
+import { View } from "react-native";
+import { Card } from "./Card";
+import { Text } from "./Text";
 
 const meta = {
-  title: 'Design System/Card',
+  title: "Design System/Card",
   component: Card,
   args: { onPress: fn() },
   argTypes: {
     variant: {
-      options: ['default', 'elevated', 'outlined'],
-      control: { type: 'radio' },
+      options: ["default", "elevated", "outlined"],
+      control: { type: "radio" },
     },
     padding: {
-      options: ['none', 'sm', 'md', 'lg'],
-      control: { type: 'radio' },
+      options: ["none", "sm", "md", "lg"],
+      control: { type: "radio" },
     },
-    onPress: { action: 'pressed' },
+    onPress: { action: "pressed" },
     style: { table: { disable: true } },
     children: { table: { disable: true } },
   },
@@ -29,8 +29,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    variant: 'default',
-    padding: 'md',
+    variant: "default",
+    padding: "md",
   },
   render: (args) => (
     <Card {...args}>
@@ -44,8 +44,8 @@ export const Default: Story = {
 
 export const Elevated: Story = {
   args: {
-    variant: 'elevated',
-    padding: 'md',
+    variant: "elevated",
+    padding: "md",
   },
   render: (args) => (
     <Card {...args}>
@@ -59,8 +59,8 @@ export const Elevated: Story = {
 
 export const Outlined: Story = {
   args: {
-    variant: 'outlined',
-    padding: 'md',
+    variant: "outlined",
+    padding: "md",
   },
   render: (args) => (
     <Card {...args}>
@@ -74,8 +74,8 @@ export const Outlined: Story = {
 
 export const Pressable: Story = {
   args: {
-    variant: 'default',
-    padding: 'md',
+    variant: "default",
+    padding: "md",
   },
   render: (args) => (
     <Card {...args}>
@@ -91,7 +91,7 @@ export const PaddingSizes: Story = {
   render: () => (
     <View style={{ gap: 16 }}>
       <Card padding="none">
-        <View style={{ backgroundColor: '#333', padding: 16 }}>
+        <View style={{ backgroundColor: "#333", padding: 16 }}>
           <Text>No padding</Text>
         </View>
       </Card>

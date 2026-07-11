@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from 'storybook/test';
-import { MemberProfile } from './MemberProfile';
+import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "storybook/test";
+import { MemberProfile } from "./MemberProfile";
 
 const meta = {
-  title: 'Screens/MemberProfile',
+  title: "Screens/MemberProfile",
   component: MemberProfile,
   parameters: {
     noSafeArea: true,
@@ -14,11 +14,11 @@ const meta = {
     onEventPress: fn(),
   },
   argTypes: {
-    member: { control: { type: 'object' } },
-    eventsAttended: { control: { type: 'object' } },
-    onEdit: { action: 'edit' },
-    onRemove: { action: 'remove' },
-    onEventPress: { action: 'event pressed' },
+    member: { control: { type: "object" } },
+    eventsAttended: { control: { type: "object" } },
+    onEdit: { action: "edit" },
+    onRemove: { action: "remove" },
+    onEventPress: { action: "event pressed" },
   },
 } satisfies Meta<typeof MemberProfile>;
 
@@ -35,24 +35,24 @@ const pastDate = (daysAgo: number) => {
 
 const sampleEvents = [
   {
-    id: '1',
-    title: 'React Native Performance Workshop',
+    id: "1",
+    title: "React Native Performance Workshop",
     date: pastDate(30),
-    location: 'Porto Tech Hub',
+    location: "Porto Tech Hub",
     attendees: [],
   },
   {
-    id: '2',
-    title: 'Monthly Meetup - December',
+    id: "2",
+    title: "Monthly Meetup - December",
     date: pastDate(60),
-    location: 'Co-work Porto',
+    location: "Co-work Porto",
     attendees: [],
   },
   {
-    id: '3',
-    title: 'Expo Workshop',
+    id: "3",
+    title: "Expo Workshop",
     date: pastDate(90),
-    location: 'Online',
+    location: "Online",
     isOnline: true,
     attendees: [],
   },
@@ -61,9 +61,9 @@ const sampleEvents = [
 export const Default: Story = {
   args: {
     member: {
-      id: '1',
-      name: 'Maria Santos',
-      role: 'Community Lead & Senior Mobile Engineer',
+      id: "1",
+      name: "Maria Santos",
+      role: "Community Lead & Senior Mobile Engineer",
       isOrganizer: true,
     },
     eventsAttended: sampleEvents,
@@ -73,9 +73,9 @@ export const Default: Story = {
 export const WithActions: Story = {
   args: {
     member: {
-      id: '2',
-      name: 'João Silva',
-      role: 'React Native Developer',
+      id: "2",
+      name: "João Silva",
+      role: "React Native Developer",
     },
     eventsAttended: sampleEvents.slice(0, 2),
     onEdit: fn(),
@@ -87,9 +87,9 @@ export const WithActions: Story = {
 export const Organizer: Story = {
   args: {
     member: {
-      id: '1',
-      name: 'Maria Santos',
-      role: 'Community Lead',
+      id: "1",
+      name: "Maria Santos",
+      role: "Community Lead",
       isOrganizer: true,
     },
     eventsAttended: sampleEvents,
@@ -100,9 +100,9 @@ export const Organizer: Story = {
 export const NewMember: Story = {
   args: {
     member: {
-      id: '3',
-      name: 'Pedro Costa',
-      role: 'Junior Developer',
+      id: "3",
+      name: "Pedro Costa",
+      role: "Junior Developer",
     },
     eventsAttended: [],
   },

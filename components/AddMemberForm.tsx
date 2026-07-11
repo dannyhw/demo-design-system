@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { Input } from './Input';
-import { Button } from './Button';
-import { Text } from './Text';
-import { Card } from './Card';
-import { spacing } from './theme';
+import { useState } from "react";
+import { StyleSheet, View, ScrollView } from "react-native";
+import { Input } from "./Input";
+import { Button } from "./Button";
+import { Text } from "./Text";
+import { Card } from "./Card";
+import { spacing } from "./theme";
 
 export interface AddMemberFormData {
   name: string;
@@ -23,19 +23,19 @@ export const AddMemberForm = ({
   onCancel,
   isLoading = false,
 }: AddMemberFormProps) => {
-  const [name, setName] = useState('');
-  const [role, setRole] = useState('');
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
   const [errors, setErrors] = useState<{ name?: string; role?: string }>({});
 
   const validate = (): boolean => {
     const newErrors: { name?: string; role?: string } = {};
 
     if (!name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = "Name is required";
     }
 
     if (!role.trim()) {
-      newErrors.role = 'Role is required';
+      newErrors.role = "Role is required";
     }
 
     setErrors(newErrors);
@@ -96,7 +96,7 @@ export const AddMemberForm = ({
           )}
           <Button
             variant="primary"
-            label={isLoading ? 'Adding...' : 'Add Member'}
+            label={isLoading ? "Adding..." : "Add Member"}
             onPress={handleSubmit}
             loading={isLoading}
             disabled={isLoading}
@@ -122,8 +122,8 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xl,
   },
   actions: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    flexDirection: "row",
+    justifyContent: "flex-end",
     gap: spacing.md,
   },
 });

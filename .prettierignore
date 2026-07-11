@@ -1,0 +1,10 @@
+node_modules/
+.agents/
+.expo/
+dist/
+web-build/
+ios/
+android/
+artifacts/
+storybook-static/
+.rnstorybook/storybook.requires.ts

@@ -16,9 +16,7 @@ export default function MemberProfilePage() {
     <MemberProfile
       member={member}
       eventsAttended={eventsAttendedByMember[member.id] ?? []}
-      onEventPress={(event) =>
-        router.push(`/(tabs)/(events)/${event.id}`)
-      }
+      onEventPress={(event) => router.push(`/(tabs)/(events)/${event.id}`)}
     />
   );
 }

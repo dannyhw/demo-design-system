@@ -1,10 +1,9 @@
-import { StyleSheet, View } from 'react-native';
-import { Text } from './Text';
-import { Avatar } from './Avatar';
-import { Badge } from './Badge';
-import { Button } from './Button';
-import { Card } from './Card';
-import { spacing } from './theme';
+import { Pressable, StyleSheet, View } from "react-native";
+import { Text } from "./Text";
+import { Avatar } from "./Avatar";
+import { Badge } from "./Badge";
+import { Card } from "./Card";
+import { colors, radius, spacing } from "./theme";
 
 export interface Member {
   id: string;
@@ -45,12 +44,18 @@ export const MemberCard = ({ member, onPress, onRemove }: MemberCardProps) => {
           )}
         </View>
         {onRemove && (
-          <Button
-            variant="ghost"
-            size="sm"
-            label="×"
+          <Pressable
             onPress={onRemove}
-          />
+            style={({ pressed }) => [
+              styles.removeButton,
+              pressed && styles.pressed,
+            ]}
+            accessibilityRole="button"
+            accessibilityLabel="Remove member"
+            hitSlop={6}
+          >
+            <Text style={styles.removeIcon}>×</Text>
+          </Pressable>
         )}
       </View>
     </Card>
@@ -59,8 +64,8 @@ export const MemberCard = ({ member, onPress, onRemove }: MemberCardProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: spacing.md,
   },
   content: {
@@ -68,8 +73,22 @@ const styles = StyleSheet.create({
     marginLeft: spacing.md,
   },
   nameRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: spacing.sm,
   },
+  removeButton: {
+    width: 32,
+    height: 32,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: radius.md,
+    backgroundColor: colors.backgroundTertiary,
+  },
+  removeIcon: {
+    fontSize: 20,
+    lineHeight: 22,
+    color: colors.foregroundSecondary,
+  },
+  pressed: { opacity: 0.8 },
 });

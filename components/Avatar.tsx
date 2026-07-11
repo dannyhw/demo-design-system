@@ -1,16 +1,16 @@
-import { StyleSheet, View, Image, ImageSourcePropType } from 'react-native';
-import { Text } from './Text';
-import { colors } from './theme';
+import { StyleSheet, View, Image, ImageSourcePropType } from "react-native";
+import { Text } from "./Text";
+import { colors } from "./theme";
 
 export interface AvatarProps {
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
   source?: ImageSourcePropType;
   name?: string;
   showBorder?: boolean;
 }
 
 const getInitials = (name: string): string => {
-  const parts = name.trim().split(' ');
+  const parts = name.trim().split(" ");
   if (parts.length >= 2) {
     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
   }
@@ -19,13 +19,13 @@ const getInitials = (name: string): string => {
 
 const getColorFromName = (name: string): string => {
   const colorPalette = [
-    '#0070f3',
-    '#7928ca',
-    '#ff0080',
-    '#f5a623',
-    '#50e3c2',
-    '#0070f3',
-    '#79ffe1',
+    "#0070f3",
+    "#7928ca",
+    "#ff0080",
+    "#f5a623",
+    "#50e3c2",
+    "#0070f3",
+    "#79ffe1",
   ];
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
@@ -35,9 +35,9 @@ const getColorFromName = (name: string): string => {
 };
 
 export const Avatar = ({
-  size = 'md',
+  size = "md",
   source,
-  name = '',
+  name = "",
   showBorder = false,
 }: AvatarProps) => {
   const sizeValue = sizeMap[size];
@@ -56,7 +56,11 @@ export const Avatar = ({
           source={source}
           style={[
             styles.image,
-            { width: sizeValue, height: sizeValue, borderRadius: sizeValue / 2 },
+            {
+              width: sizeValue,
+              height: sizeValue,
+              borderRadius: sizeValue / 2,
+            },
           ]}
         />
       </View>
@@ -70,7 +74,12 @@ export const Avatar = ({
       style={[
         styles.container,
         styles.placeholder,
-        { width: sizeValue, height: sizeValue, borderRadius: sizeValue / 2, backgroundColor },
+        {
+          width: sizeValue,
+          height: sizeValue,
+          borderRadius: sizeValue / 2,
+          backgroundColor,
+        },
         showBorder && styles.border,
       ]}
     >
@@ -97,18 +106,18 @@ const fontSizeMap = {
 
 const styles = StyleSheet.create({
   container: {
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   border: {
     borderWidth: 2,
     borderColor: colors.background,
   },
   image: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   placeholder: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

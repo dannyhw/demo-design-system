@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Divider } from './Divider';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Divider } from "./Divider";
 
 const meta = {
-  title: 'Design System/Divider',
+  title: "Design System/Divider",
   component: Divider,
   argTypes: {
     spacing: {
-      options: ['none', 'sm', 'md', 'lg'],
-      control: { type: 'radio' },
+      options: ["none", "sm", "md", "lg"],
+      control: { type: "radio" },
     },
     style: { table: { disable: true } },
   },
@@ -19,24 +19,24 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    spacing: 'md',
+    spacing: "md",
   },
 };
 
 export const NoSpacing: Story = {
   args: {
-    spacing: 'none',
+    spacing: "none",
   },
 };
 
 export const SmallSpacing: Story = {
   args: {
-    spacing: 'sm',
+    spacing: "sm",
   },
 };
 
 export const LargeSpacing: Story = {
   args: {
-    spacing: 'lg',
+    spacing: "lg",
   },
 };

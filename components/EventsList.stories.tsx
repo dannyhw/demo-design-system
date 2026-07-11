@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { fn } from 'storybook/test';
-import { EventsList } from './EventsList';
+import type { Meta, StoryObj } from "@storybook/react";
+import { fn } from "storybook/test";
+import { EventsList } from "./EventsList";
 
 const meta = {
-  title: 'Screens/EventsList',
+  title: "Screens/EventsList",
   component: EventsList,
   parameters: {
     noSafeArea: true,
@@ -14,10 +14,10 @@ const meta = {
     onCreateEvent: fn(),
   },
   argTypes: {
-    events: { control: { type: 'object' } },
-    onEventPress: { action: 'event pressed' },
-    onRSVP: { action: 'rsvp' },
-    onCreateEvent: { action: 'create event' },
+    events: { control: { type: "object" } },
+    onEventPress: { action: "event pressed" },
+    onRSVP: { action: "rsvp" },
+    onCreateEvent: { action: "create event" },
   },
 } satisfies Meta<typeof EventsList>;
 
@@ -41,37 +41,37 @@ const pastDate = (daysAgo: number) => {
 
 const sampleEvents = [
   {
-    id: '1',
-    title: 'React Native Performance Workshop',
-    description: 'Deep dive into performance optimization techniques.',
+    id: "1",
+    title: "React Native Performance Workshop",
+    description: "Deep dive into performance optimization techniques.",
     date: futureDate(7),
-    location: 'Porto Tech Hub',
-    attendees: [{ name: 'João' }, { name: 'Maria' }, { name: 'Pedro' }],
+    location: "Porto Tech Hub",
+    attendees: [{ name: "João" }, { name: "Maria" }, { name: "Pedro" }],
     maxAttendees: 30,
   },
   {
-    id: '2',
-    title: 'Expo SDK 54 Deep Dive',
-    description: 'Exploring the latest Expo features and best practices.',
+    id: "2",
+    title: "Expo SDK 54 Deep Dive",
+    description: "Exploring the latest Expo features and best practices.",
     date: futureDate(14),
-    location: 'Online',
+    location: "Online",
     isOnline: true,
-    attendees: [{ name: 'Ana' }, { name: 'Carlos' }],
+    attendees: [{ name: "Ana" }, { name: "Carlos" }],
   },
   {
-    id: '3',
-    title: 'Monthly Meetup - January',
-    description: 'Our first meetup of the year!',
+    id: "3",
+    title: "Monthly Meetup - January",
+    description: "Our first meetup of the year!",
     date: pastDate(15),
-    location: 'Co-work Porto',
-    attendees: [{ name: 'A' }, { name: 'B' }, { name: 'C' }, { name: 'D' }],
+    location: "Co-work Porto",
+    attendees: [{ name: "A" }, { name: "B" }, { name: "C" }, { name: "D" }],
   },
   {
-    id: '4',
-    title: 'React Native Animation Workshop',
+    id: "4",
+    title: "React Native Animation Workshop",
     date: pastDate(45),
-    location: 'Porto Tech Hub',
-    attendees: [{ name: 'X' }, { name: 'Y' }],
+    location: "Porto Tech Hub",
+    attendees: [{ name: "X" }, { name: "Y" }],
   },
 ];
 

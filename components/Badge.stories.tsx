@@ -1,19 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { View } from 'react-native';
-import { Badge } from './Badge';
+import type { Meta, StoryObj } from "@storybook/react";
+import { View } from "react-native";
+import { Badge } from "./Badge";
 
 const meta = {
-  title: 'Design System/Badge',
+  title: "Design System/Badge",
   component: Badge,
   argTypes: {
-    label: { control: { type: 'text' } },
+    label: { control: { type: "text" } },
     variant: {
-      options: ['default', 'success', 'warning', 'error', 'accent'],
-      control: { type: 'radio' },
+      options: ["default", "success", "warning", "error", "accent"],
+      control: { type: "radio" },
     },
     size: {
-      options: ['sm', 'md'],
-      control: { type: 'radio' },
+      options: ["sm", "md"],
+      control: { type: "radio" },
     },
   },
 } satisfies Meta<typeof Badge>;
@@ -24,50 +24,50 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    label: 'Default',
-    variant: 'default',
+    label: "Default",
+    variant: "default",
   },
 };
 
 export const Success: Story = {
   args: {
-    label: 'Active',
-    variant: 'success',
+    label: "Active",
+    variant: "success",
   },
 };
 
 export const Warning: Story = {
   args: {
-    label: 'Pending',
-    variant: 'warning',
+    label: "Pending",
+    variant: "warning",
   },
 };
 
 export const Error: Story = {
   args: {
-    label: 'Failed',
-    variant: 'error',
+    label: "Failed",
+    variant: "error",
   },
 };
 
 export const Accent: Story = {
   args: {
-    label: 'New',
-    variant: 'accent',
+    label: "New",
+    variant: "accent",
   },
 };
 
 export const Small: Story = {
   args: {
-    label: 'Small',
-    size: 'sm',
+    label: "Small",
+    size: "sm",
   },
 };
 
 export const AllVariants: Story = {
   args: { label: "Gallery" },
   render: () => (
-    <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
+    <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
       <Badge label="Default" variant="default" />
       <Badge label="Success" variant="success" />
       <Badge label="Warning" variant="warning" />
@@ -80,7 +80,7 @@ export const AllVariants: Story = {
 export const MeetupBadges: Story = {
   args: { label: "Gallery" },
   render: () => (
-    <View style={{ flexDirection: 'row', gap: 8, flexWrap: 'wrap' }}>
+    <View style={{ flexDirection: "row", gap: 8, flexWrap: "wrap" }}>
       <Badge label="Organizer" variant="accent" />
       <Badge label="Speaker" variant="success" />
       <Badge label="Member" variant="default" />

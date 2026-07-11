@@ -1,14 +1,14 @@
-import { StyleSheet, View, ScrollView } from 'react-native';
-import { Avatar } from './Avatar';
-import { Text } from './Text';
-import { Badge } from './Badge';
-import { Button } from './Button';
-import { Card } from './Card';
-import { Divider } from './Divider';
-import { SectionHeader } from './SectionHeader';
-import { EventCard, Event } from './EventCard';
-import { Member } from './MemberCard';
-import { colors, spacing } from './theme';
+import { StyleSheet, View, ScrollView } from "react-native";
+import { Avatar } from "./Avatar";
+import { Text } from "./Text";
+import { Badge } from "./Badge";
+import { Button } from "./Button";
+import { Card } from "./Card";
+import { Divider } from "./Divider";
+import { SectionHeader } from "./SectionHeader";
+import { EventCard, Event } from "./EventCard";
+import { Member } from "./MemberCard";
+import { colors, spacing } from "./theme";
 
 export interface MemberProfileProps {
   member: Member;
@@ -41,9 +41,7 @@ export const MemberProfile = ({
             <Text variant="h2" weight="bold">
               {member.name}
             </Text>
-            {member.isOrganizer && (
-              <Badge variant="accent" label="Organizer" />
-            )}
+            {member.isOrganizer && <Badge variant="accent" label="Organizer" />}
           </View>
           {member.role && (
             <Text variant="body" color="secondary">
@@ -89,7 +87,7 @@ export const MemberProfile = ({
           <View style={styles.statDivider} />
           <View style={styles.stat}>
             <Text variant="h2" weight="bold">
-              {member.isOrganizer ? 'Yes' : 'No'}
+              {member.isOrganizer ? "Yes" : "No"}
             </Text>
             <Text variant="caption" color="secondary">
               Organizer
@@ -100,7 +98,10 @@ export const MemberProfile = ({
 
       {eventsAttended.length > 0 && (
         <View style={styles.eventsSection}>
-          <SectionHeader title="Events Attended" count={eventsAttended.length} />
+          <SectionHeader
+            title="Events Attended"
+            count={eventsAttended.length}
+          />
           <View style={styles.eventsList}>
             {eventsAttended.slice(0, 3).map((event) => (
               <EventCard
@@ -121,8 +122,8 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: spacing.lg,
   },
   headerInfo: {
@@ -130,23 +131,23 @@ const styles = StyleSheet.create({
     marginLeft: spacing.lg,
   },
   nameRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: spacing.sm,
     marginBottom: spacing.xs,
   },
   actions: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: spacing.md,
     marginBottom: spacing.lg,
   },
   statsRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   stat: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   statDivider: {
     width: 1,

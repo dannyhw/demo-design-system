@@ -25,9 +25,7 @@ export default function Events() {
         events={events.filter((event) =>
           event.title.toLowerCase().includes(search.toLowerCase()),
         )}
-        onEventPress={(event) =>
-          router.push(`/(tabs)/(events)/${event.id}`)
-        }
+        onEventPress={(event) => router.push(`/(tabs)/(events)/${event.id}`)}
       />
     </>
   );

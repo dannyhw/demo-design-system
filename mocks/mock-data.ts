@@ -36,7 +36,11 @@ export const events: Event[] = [
     description: "Deep dive into performance optimization techniques.",
     date: futureDate(7),
     location: "Porto Tech Hub",
-    attendees: [{ name: "João" }, { name: "Maria" }, { name: "Pedro" }],
+    attendees: [
+      { id: "2", name: "João Silva" },
+      { id: "1", name: "Maria Santos" },
+      { id: "3", name: "Pedro Costa" },
+    ],
     maxAttendees: 30,
   },
   {
@@ -46,7 +50,10 @@ export const events: Event[] = [
     date: futureDate(14),
     location: "Online",
     isOnline: true,
-    attendees: [{ name: "Ana" }, { name: "Carlos" }],
+    attendees: [
+      { id: "4", name: "Ana Ferreira" },
+      { id: "5", name: "Carlos Rodrigues" },
+    ],
   },
   {
     id: "3",
@@ -54,14 +61,22 @@ export const events: Event[] = [
     description: "Our first meetup of the year!",
     date: pastDate(15),
     location: "Co-work Porto",
-    attendees: [{ name: "A" }, { name: "B" }, { name: "C" }, { name: "D" }],
+    attendees: [
+      { id: "1", name: "Maria Santos" },
+      { id: "2", name: "João Silva" },
+      { id: "5", name: "Carlos Rodrigues" },
+      { id: "6", name: "Sofia Martins" },
+    ],
   },
   {
     id: "4",
     title: "React Native Animation Workshop",
     date: pastDate(45),
     location: "Porto Tech Hub",
-    attendees: [{ name: "X" }, { name: "Y" }],
+    attendees: [
+      { id: "3", name: "Pedro Costa" },
+      { id: "5", name: "Carlos Rodrigues" },
+    ],
   },
 ];
 

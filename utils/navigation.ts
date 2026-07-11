@@ -6,7 +6,6 @@ import { StackScreenProps } from "expo-router";
 const isGlassAvailable = isLiquidGlassAvailable();
 
 export const stackScreenOptions: StackScreenProps["options"] = {
-  title: "Home",
   headerTransparent: Platform.OS === "ios" && isGlassAvailable,
   headerShadowVisible: false,
   headerLargeTitleShadowVisible: false,

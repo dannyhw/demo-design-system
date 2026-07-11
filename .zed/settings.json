@@ -4,13 +4,13 @@
 // see the documentation: https://zed.dev/docs/configuring-zed#settings-files
 {
   "code_actions_on_format": {
-    "source.fixAll.eslint": true,
+    "source.fixAll.eslint": true
   },
   "format_on_save": "on",
   "formatter": "prettier",
   "language_servers": ["!biome", "eslint", "vtsls", "react-compiler-marker"],
 
   "inlay_hints": {
-    "enabled": true,
-  },
+    "enabled": true
+  }
 }

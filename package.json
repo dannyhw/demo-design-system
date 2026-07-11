@@ -7,6 +7,8 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "expo lint",
     "lint:fix": "expo lint --fix",
     "storybook": "cross-env STORYBOOK_ENABLED=true expo start --dev-client",
@@ -53,9 +55,11 @@
     "storybook": "10.5.0"
   },
   "devDependencies": {
+    "@prettier/plugin-oxc": "0.2.1",
     "@types/react": "~19.2.14",
     "eslint": "^9.18.0",
     "eslint-config-expo": "~57.0.0",
+    "prettier": "3.9.5",
     "typescript": "~6.0.3"
   },
   "private": true

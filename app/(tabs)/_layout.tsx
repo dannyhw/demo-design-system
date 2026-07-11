@@ -1,6 +1,10 @@
 import { NativeTabs } from "expo-router/unstable-native-tabs";
 import { colors } from "../../components/theme";
 
+export const unstable_settings = {
+  initialRouteName: "(home)",
+};
+
 export default function TabsLayout() {
   return (
     <NativeTabs

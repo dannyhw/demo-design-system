@@ -1,8 +1,9 @@
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { EventDetails } from "../../../components";
 import { events } from "../../../mocks/mock-data";
 
 export default function EventDetailsPage() {
+  const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const event = events.find((item) => item.id === id);
 
@@ -12,8 +13,13 @@ export default function EventDetailsPage() {
 
   return (
     <>
-      <Stack.Screen options={{ title: event.title, headerLargeTitle: false }} />
-      <EventDetails event={event} />
+      <Stack.Screen options={{ title: "Event", headerLargeTitle: false }} />
+      <EventDetails
+        event={event}
+        onAttendeePress={(memberId) =>
+          router.push(`/(tabs)/(members)/${memberId}`)
+        }
+      />
     </>
   );
 }
