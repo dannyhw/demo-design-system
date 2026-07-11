@@ -42,3 +42,6 @@ yarn-error.*
 
 *storybook.log
 storybook-static
+
+# generated visual reports and screenshots
+/artifacts/
