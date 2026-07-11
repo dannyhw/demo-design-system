@@ -1,7 +1,7 @@
 import {
-  StyleSheet,
   Text as RNText,
-  type TextProps as RNTextProps,
+  TextProps as RNTextProps,
+  StyleSheet,
 } from "react-native";
 import { colors, typography } from "./theme";
 
@@ -11,7 +11,6 @@ export interface TextProps extends RNTextProps {
   color?: "primary" | "secondary" | "tertiary" | "accent" | "error" | "success";
   weight?: "regular" | "medium" | "semibold" | "bold";
   align?: "left" | "center" | "right";
-  textStyle?: RNTextProps["style"];
 }
 
 export const Text = ({
@@ -20,21 +19,31 @@ export const Text = ({
   weight,
   align,
   style,
-  textStyle,
+  children,
   ...props
-}: TextProps) => (
-  <RNText
-    style={[
-      variantStyles[variant],
-      colorStyles[color],
-      weight && weightStyles[weight],
-      align && { textAlign: align },
-      textStyle,
-      style,
-    ]}
-    {...props}
-  />
-);
+}: TextProps) => {
+  return (
+    <RNText
+      style={[
+        styles.base,
+        variantStyles[variant],
+        colorStyles[color],
+        weight && weightStyles[weight],
+        align && { textAlign: align },
+        style,
+      ]}
+      {...props}
+    >
+      {children}
+    </RNText>
+  );
+};
+
+const styles = StyleSheet.create({
+  base: {
+    color: colors.foreground,
+  },
+});
 
 const variantStyles = StyleSheet.create({
   display: {
@@ -84,17 +93,37 @@ const variantStyles = StyleSheet.create({
 });
 
 const colorStyles = StyleSheet.create({
-  primary: { color: colors.foreground },
-  secondary: { color: colors.foregroundSecondary },
-  tertiary: { color: colors.foregroundTertiary },
-  accent: { color: colors.accent },
-  error: { color: colors.error },
-  success: { color: colors.success },
+  primary: {
+    color: colors.foreground,
+  },
+  secondary: {
+    color: colors.foregroundSecondary,
+  },
+  tertiary: {
+    color: colors.foregroundTertiary,
+  },
+  accent: {
+    color: colors.accent,
+  },
+  error: {
+    color: colors.error,
+  },
+  success: {
+    color: colors.success,
+  },
 });
 
 const weightStyles = StyleSheet.create({
-  regular: { fontWeight: "400" },
-  medium: { fontWeight: "500" },
-  semibold: { fontWeight: "600" },
-  bold: { fontWeight: "700" },
+  regular: {
+    fontWeight: "400",
+  },
+  medium: {
+    fontWeight: "500",
+  },
+  semibold: {
+    fontWeight: "600",
+  },
+  bold: {
+    fontWeight: "700",
+  },
 });

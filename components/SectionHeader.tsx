@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Text } from "./Text";
 import { colors, spacing } from "./theme";
 
@@ -14,31 +14,31 @@ export const SectionHeader = ({
   action,
   onAction,
   count,
-}: SectionHeaderProps) => (
-  <View style={styles.container}>
-    <View style={styles.titleRow}>
-      <Text
-        variant="label"
-        color="secondary"
-        textStyle={{ letterSpacing: 0.5 }}
-      >
-        {title.toUpperCase()}
-      </Text>
-      {count !== undefined && (
-        <View style={styles.countBadge}>
-          <Text variant="caption" color="secondary">
-            {count}
+}: SectionHeaderProps) => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.titleRow}>
+        <Text variant="label" color="secondary" style={styles.title}>
+          {title.toUpperCase()}
+        </Text>
+        {count !== undefined && (
+          <View style={styles.countBadge}>
+            <Text variant="caption" color="secondary">
+              {count}
+            </Text>
+          </View>
+        )}
+      </View>
+      {action && onAction && (
+        <TouchableOpacity onPress={onAction}>
+          <Text variant="bodySmall" color="accent">
+            {action}
           </Text>
-        </View>
+        </TouchableOpacity>
       )}
     </View>
-    {action && onAction && (
-      <Text variant="bodySmall" color="accent" onPress={onAction}>
-        {action}
-      </Text>
-    )}
-  </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -50,6 +50,9 @@ const styles = StyleSheet.create({
   titleRow: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  title: {
+    letterSpacing: 0.5,
   },
   countBadge: {
     marginLeft: spacing.sm,

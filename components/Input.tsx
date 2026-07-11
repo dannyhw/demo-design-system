@@ -1,16 +1,14 @@
-import { useState } from "react";
-import {
-  Pressable,
-  StyleSheet,
-  TextInput,
-  type TextInputProps,
-  View,
-} from "react-native";
+import { ComponentPropsWithRef, useState } from "react";
+import { StyleSheet, TextInput, View, TouchableOpacity } from "react-native";
 import { Text } from "./Text";
 import { colors, spacing, radius, typography } from "./theme";
 
-export interface InputProps extends Omit<TextInputProps, "style"> {
+export interface InputProps extends Omit<
+  ComponentPropsWithRef<typeof TextInput>,
+  "style"
+> {
   label?: string;
+  placeholder?: string;
   error?: string;
   hint?: string;
   disabled?: boolean;
@@ -21,6 +19,7 @@ export interface InputProps extends Omit<TextInputProps, "style"> {
 
 export const Input = ({
   label,
+  placeholder,
   error,
   hint,
   disabled = false,
@@ -30,11 +29,21 @@ export const Input = ({
   onClear,
   onFocus,
   onBlur,
-  editable = true,
-  placeholderTextColor = colors.foregroundTertiary,
+  ref,
   ...props
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = (e: any) => {
+    setIsFocused(true);
+    onFocus?.(e);
+  };
+
+  const handleBlur = (e: any) => {
+    setIsFocused(false);
+    onBlur?.(e);
+  };
+
   return (
     <View style={styles.container}>
       {label && (
@@ -45,52 +54,43 @@ export const Input = ({
       <View
         style={[
           styles.inputWrapper,
-          isFocused && styles.focused,
-          error && styles.error,
-          disabled && styles.disabled,
+          isFocused && styles.inputWrapperFocused,
+          error && styles.inputWrapperError,
+          disabled && styles.inputWrapperDisabled,
         ]}
       >
         {prefix && <View style={styles.prefix}>{prefix}</View>}
         <TextInput
-          {...props}
+          ref={ref}
           style={[
             styles.input,
             !!prefix && styles.inputWithPrefix,
             !!suffix && styles.inputWithSuffix,
           ]}
-          placeholderTextColor={placeholderTextColor}
+          placeholder={placeholder}
+          placeholderTextColor={colors.foregroundTertiary}
           value={value}
-          editable={!disabled && editable}
-          onFocus={(event) => {
-            setIsFocused(true);
-            onFocus?.(event);
-          }}
-          onBlur={(event) => {
-            setIsFocused(false);
-            onBlur?.(event);
-          }}
+          editable={!disabled}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          {...props}
         />
         {suffix && <View style={styles.suffix}>{suffix}</View>}
-        {onClear && value ? (
-          <Pressable
-            onPress={onClear}
-            style={styles.clearButton}
-            accessibilityRole="button"
-            accessibilityLabel="Clear"
-          >
+        {onClear && value && (
+          <TouchableOpacity onPress={onClear} style={styles.clearButton}>
             <Text color="tertiary" style={styles.clearIcon}>
               ×
             </Text>
-          </Pressable>
-        ) : null}
+          </TouchableOpacity>
+        )}
       </View>
       {error && (
-        <Text variant="caption" color="error" style={styles.message}>
+        <Text variant="caption" color="error" style={styles.errorText}>
           {error}
         </Text>
       )}
       {hint && !error && (
-        <Text variant="caption" color="tertiary" style={styles.message}>
+        <Text variant="caption" color="tertiary" style={styles.hintText}>
           {hint}
         </Text>
       )}
@@ -99,8 +99,12 @@ export const Input = ({
 };
 
 const styles = StyleSheet.create({
-  container: { width: "100%" },
-  label: { marginBottom: spacing.sm },
+  container: {
+    width: "100%",
+  },
+  label: {
+    marginBottom: spacing.sm,
+  },
   inputWrapper: {
     flexDirection: "row",
     alignItems: "center",
@@ -108,13 +112,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
     borderRadius: radius.md,
-    borderCurve: "continuous",
     minHeight: 40,
-    overflow: "hidden",
   },
-  focused: { borderColor: colors.foreground },
-  error: { borderColor: colors.error },
-  disabled: { opacity: 0.5 },
+  inputWrapperFocused: {
+    borderColor: colors.foreground,
+  },
+  inputWrapperError: {
+    borderColor: colors.error,
+  },
+  inputWrapperDisabled: {
+    opacity: 0.5,
+  },
   input: {
     flex: 1,
     color: colors.foreground,
@@ -122,11 +130,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.md,
   },
-  inputWithPrefix: { paddingLeft: spacing.xs },
-  inputWithSuffix: { paddingRight: spacing.xs },
-  prefix: { paddingLeft: spacing.md },
-  suffix: { paddingRight: spacing.md },
-  clearButton: { paddingHorizontal: spacing.md, paddingVertical: spacing.sm },
-  clearIcon: { fontSize: 18 },
-  message: { marginTop: spacing.sm },
+  inputWithPrefix: {
+    paddingLeft: spacing.xs,
+  },
+  inputWithSuffix: {
+    paddingRight: spacing.xs,
+  },
+  prefix: {
+    paddingLeft: spacing.md,
+  },
+  suffix: {
+    paddingRight: spacing.md,
+  },
+  clearButton: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+  },
+  clearIcon: {
+    fontSize: 18,
+  },
+  errorText: {
+    marginTop: spacing.sm,
+  },
+  hintText: {
+    marginTop: spacing.sm,
+  },
 });

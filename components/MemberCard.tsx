@@ -1,9 +1,8 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Text } from "./Text";
 import { Avatar } from "./Avatar";
 import { Badge } from "./Badge";
-import { Card } from "./Card";
-import { colors, radius, spacing } from "./theme";
+import { colors, spacing, radius } from "./theme";
 
 export interface Member {
   id: string;
@@ -21,7 +20,11 @@ export interface MemberCardProps {
 
 export const MemberCard = ({ member, onPress, onRemove }: MemberCardProps) => {
   return (
-    <Card padding="none" onPress={onPress}>
+    <TouchableOpacity
+      activeOpacity={onPress ? 0.7 : 1}
+      onPress={onPress}
+      disabled={!onPress}
+    >
       <View style={styles.container}>
         <Avatar
           name={member.name}
@@ -30,7 +33,7 @@ export const MemberCard = ({ member, onPress, onRemove }: MemberCardProps) => {
         />
         <View style={styles.content}>
           <View style={styles.nameRow}>
-            <Text variant="body" weight="medium">
+            <Text variant="body" weight="medium" style={styles.name}>
               {member.name}
             </Text>
             {member.isOrganizer && (
@@ -44,21 +47,16 @@ export const MemberCard = ({ member, onPress, onRemove }: MemberCardProps) => {
           )}
         </View>
         {onRemove && (
-          <Pressable
+          <TouchableOpacity
             onPress={onRemove}
-            style={({ pressed }) => [
-              styles.removeButton,
-              pressed && styles.pressed,
-            ]}
-            accessibilityRole="button"
+            style={styles.removeButton}
             accessibilityLabel="Remove member"
-            hitSlop={6}
           >
             <Text style={styles.removeIcon}>×</Text>
-          </Pressable>
+          </TouchableOpacity>
         )}
       </View>
-    </Card>
+    </TouchableOpacity>
   );
 };
 
@@ -67,6 +65,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: spacing.md,
+    backgroundColor: colors.backgroundSecondary,
+    borderRadius: radius.lg,
+    borderWidth: 1,
+    borderColor: colors.borderLight,
   },
   content: {
     flex: 1,
@@ -76,6 +78,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: spacing.sm,
+  },
+  name: {
+    color: colors.foreground,
   },
   removeButton: {
     width: 32,
@@ -87,8 +92,6 @@ const styles = StyleSheet.create({
   },
   removeIcon: {
     fontSize: 20,
-    lineHeight: 22,
     color: colors.foregroundSecondary,
   },
-  pressed: { opacity: 0.8 },
 });

@@ -39,7 +39,8 @@ export const HomeScreen = ({
           Welcome back!
         </Text>
         <Text variant="body" color="secondary" style={styles.welcomeText}>
-          {`${totalMembers} members strong and growing. Check out what's happening in the community.`}
+          {totalMembers} members strong and growing. Check out {"what's"}
+          happening in the community.
         </Text>
         <View style={styles.welcomeActions}>
           <Button

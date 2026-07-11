@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "storybook/test";
+import { View } from "react-native";
 import { Button } from "./Button";
-import { Column, Host } from "@expo/ui";
-import { Platform, View } from "react-native";
 
 const meta = {
   title: "Design System/Button",
@@ -23,36 +22,6 @@ const meta = {
     fullWidth: { control: { type: "boolean" } },
     icon: { table: { disable: true } },
     onPress: { action: "pressed" },
-  },
-  render: (args) => {
-    if (Platform.OS === "android") {
-      // this is needed because otherwise the buttons jump into view
-      return (
-        <View
-          style={{
-            height: "25%",
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Button {...args} />
-        </View>
-      );
-    }
-    return (
-      // this is needed because otherwise the buttons jump into view
-      <Host
-        style={{
-          height: "25%",
-          width: "100%",
-        }}
-      >
-        <Column alignment="center">
-          <Button {...args} />
-        </Column>
-      </Host>
-    );
   },
 } satisfies Meta<typeof Button>;
 
@@ -131,13 +100,13 @@ export const FullWidth: Story = {
 };
 
 export const AllVariants: Story = {
-  args: { label: "Gallery", fullWidth: true },
-  render: (args) => (
-    <View style={{ width: "100%", gap: 12, alignItems: "center" }}>
-      <Button {...args} variant="primary" label="Primary" />
-      <Button {...args} variant="secondary" label="Secondary" />
-      <Button {...args} variant="ghost" label="Ghost" />
-      <Button {...args} variant="danger" label="Danger" />
+  args: { label: "Gallery" },
+  render: () => (
+    <View style={{ gap: 12 }}>
+      <Button variant="primary" label="Primary" />
+      <Button variant="secondary" label="Secondary" />
+      <Button variant="ghost" label="Ghost" />
+      <Button variant="danger" label="Danger" />
     </View>
   ),
 };

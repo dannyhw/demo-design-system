@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { useRef, useState } from "react";
+import { StyleSheet, View, ScrollView, TextInput } from "react-native";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { Text } from "./Text";
@@ -26,6 +26,7 @@ export const AddMemberForm = ({
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [errors, setErrors] = useState<{ name?: string; role?: string }>({});
+  const roleRef = useRef<TextInput>(null);
 
   const validate = (): boolean => {
     const newErrors: { name?: string; role?: string } = {};
@@ -74,14 +75,17 @@ export const AddMemberForm = ({
             onChangeText={setName}
             error={errors.name}
             autoCapitalize="words"
+            onSubmitEditing={() => roleRef.current?.focus()}
           />
 
           <Input
+            ref={roleRef}
             label="Role"
             placeholder="React Native Developer"
             value={role}
             onChangeText={setRole}
             error={errors.role}
+            onSubmitEditing={handleSubmit}
           />
         </View>
 

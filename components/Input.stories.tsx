@@ -92,8 +92,9 @@ export const WithPrefix: Story = {
   },
 };
 
-const ClearButtonExample = () => {
+const ClearableInputStory = () => {
   const [value, setValue] = useState("Clear me");
+
   return (
     <Input
       label="Search"
@@ -106,7 +107,7 @@ const ClearButtonExample = () => {
 };
 
 export const WithClearButton: Story = {
-  render: () => <ClearButtonExample />,
+  render: () => <ClearableInputStory />,
 };
 
 export const FormExample: Story = {
