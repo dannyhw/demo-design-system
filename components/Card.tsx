@@ -15,33 +15,26 @@ export const Card = ({
   children,
   ...props
 }: CardProps) => {
-  const content = (
-    <View
-      style={[
-        styles.card,
-        variantStyles[variant],
-        paddingStyles[padding],
-        style,
-      ]}
-      {...props}
+  return (
+    <Pressable
+      accessibilityRole={onPress ? "button" : undefined}
+      onPress={onPress}
+
+      style={({ pressed }) => (onPress && pressed ? styles.pressed : {})}
     >
-      {children}
-    </View>
-  );
-
-  if (onPress) {
-    return (
-      <Pressable
-        accessibilityRole="button"
-        onPress={onPress}
-        style={({ pressed }) => pressed && styles.pressed}
+      <View
+        style={[
+          styles.card,
+          variantStyles[variant],
+          paddingStyles[padding],
+          style,
+        ]}
+        {...props}
       >
-        {content}
-      </Pressable>
-    );
-  }
-
-  return content;
+        {children}
+      </View>
+    </Pressable>
+  );
 };
 
 const styles = StyleSheet.create({

@@ -7,7 +7,7 @@ import { Text } from "./Text";
 const meta = {
   title: "Design System/Card",
   component: Card,
-  args: { onPress: fn() },
+  args: { onPress: undefined },
   argTypes: {
     variant: {
       options: ["default", "elevated", "outlined"],
@@ -17,7 +17,6 @@ const meta = {
       options: ["none", "sm", "md", "lg"],
       control: { type: "radio" },
     },
-    onPress: { action: "pressed" },
     style: { table: { disable: true } },
     children: { table: { disable: true } },
   },
@@ -76,6 +75,7 @@ export const Pressable: Story = {
   args: {
     variant: "default",
     padding: "md",
+    onPress: fn(),
   },
   render: (args) => (
     <Card {...args}>

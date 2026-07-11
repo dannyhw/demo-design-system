@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text } from "./Text";
 import { Avatar } from "./Avatar";
@@ -48,64 +48,69 @@ export const EventCard = ({ event, onPress, onRSVP }: EventCardProps) => {
     : undefined;
 
   return (
-    <Card variant="default" padding="none" onPress={onPress}>
-      <View style={styles.header}>
-        <View style={styles.dateContainer}>
-          <Text variant="h2" color="primary" textStyle={{ lineHeight: 32 }}>
-            {event.date.getDate()}
-          </Text>
-          <Text
-            variant="caption"
-            color="secondary"
-            textStyle={{ letterSpacing: 1 }}
-          >
-            {event.date
-              .toLocaleDateString("en-US", { month: "short" })
-              .toUpperCase()}
-          </Text>
+    <Card variant="default" padding="none">
+      <Pressable
+        style={({ pressed }) => [pressed && styles.headerPressed]}
+        onPress={onPress}
+      >
+        <View style={styles.header}>
+          <View style={styles.dateContainer}>
+            <Text variant="h2" color="primary" textStyle={{ lineHeight: 32 }}>
+              {event.date.getDate()}
+            </Text>
+            <Text
+              variant="caption"
+              color="secondary"
+              textStyle={{ letterSpacing: 1 }}
+            >
+              {event.date
+                .toLocaleDateString("en-US", { month: "short" })
+                .toUpperCase()}
+            </Text>
+          </View>
+          <View style={styles.headerContent}>
+            <Text variant="h3" weight="semibold" align="left" numberOfLines={2}>
+              {event.title}
+            </Text>
+            <View style={styles.meta}>
+              <Text variant="bodySmall" color="secondary" align="left">
+                {formatDate(event.date)} · {formatTime(event.date)}
+              </Text>
+            </View>
+          </View>
         </View>
-        <View style={styles.headerContent}>
-          <Text variant="h3" weight="semibold" align="left" numberOfLines={2}>
-            {event.title}
-          </Text>
-          <View style={styles.meta}>
+
+        <View style={styles.body}>
+          {event.description && (
+            <Text
+              variant="bodySmall"
+              color="secondary"
+              align="left"
+              numberOfLines={2}
+              style={styles.description}
+            >
+              {event.description}
+            </Text>
+          )}
+
+          <View style={styles.locationRow}>
+            <MaterialCommunityIcons
+              name={
+                (event.isOnline
+                  ? SF_SYMBOLS_TO_MATERIAL_COMMUNITY_ICONS["globe"] || "web"
+                  : SF_SYMBOLS_TO_MATERIAL_COMMUNITY_ICONS["mappin"] ||
+                    "map-marker-outline") as any
+              }
+              size={14}
+              color={colors.foregroundSecondary}
+              style={styles.locationIcon}
+            />
             <Text variant="bodySmall" color="secondary" align="left">
-              {formatDate(event.date)} · {formatTime(event.date)}
+              {event.location}
             </Text>
           </View>
         </View>
-      </View>
-
-      <View style={styles.body}>
-        {event.description && (
-          <Text
-            variant="bodySmall"
-            color="secondary"
-            align="left"
-            numberOfLines={2}
-            style={styles.description}
-          >
-            {event.description}
-          </Text>
-        )}
-
-        <View style={styles.locationRow}>
-          <MaterialCommunityIcons
-            name={
-              (event.isOnline
-                ? SF_SYMBOLS_TO_MATERIAL_COMMUNITY_ICONS["globe"] || "web"
-                : SF_SYMBOLS_TO_MATERIAL_COMMUNITY_ICONS["mappin"] ||
-                  "map-marker-outline") as any
-            }
-            size={14}
-            color={colors.foregroundSecondary}
-            style={styles.locationIcon}
-          />
-          <Text variant="bodySmall" color="secondary" align="left">
-            {event.location}
-          </Text>
-        </View>
-      </View>
+      </Pressable>
 
       <View style={styles.footer}>
         <View style={styles.attendeesSection}>
@@ -195,5 +200,11 @@ const styles = StyleSheet.create({
   },
   avatarWrapper: {
     marginLeft: -8,
+  },
+  headerPressed: {
+    backgroundColor: colors.borderLight,
+  },
+  bodyPressed: {
+    backgroundColor: colors.borderLight,
   },
 });
